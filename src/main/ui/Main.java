@@ -65,40 +65,31 @@ public class Main {
         }
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void run() {
         boolean exit = false;
         while (!exit) {
-            System.out.println("1. Add a new contact");
-            System.out.println("2. View all contacts");
-            System.out.println("3. Update contact information");
-            System.out.println("4. Delete a contact");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("1. Add new contact\n2. View contacts\n3. Update contact\n4. Delete contact\n5. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    addContact();
-                    break;
-                case 2:
-                    viewAllContacts();
-                    break;
-                case 3:
-                    updateContact();
-                    break;
-                case 4:
-                    deleteContact();
-                    break;
-                case 5:
-                    exit = true;
-                    System.out.println("Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+
+            if (choice == 1) {
+                addContact();
+            } else if (choice == 2) {
+                viewAllContacts();
+            } else if (choice == 3) {
+                updateContact();
+            } else if (choice == 4) {
+                deleteContact();
+            } else if (choice == 5) {
+                exit = true;
+                System.out.println("Goodbye!");
+            } else {
+                System.out.println("Invalid choice. Please try again.");
             }
         }
     }
+
+
 
     private void printContactInfo(FamilyContact contact) {
         System.out.println("Name: " + contact.getName());
