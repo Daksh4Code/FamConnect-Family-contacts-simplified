@@ -54,4 +54,5 @@ public class Event {
         return ("Event{" + "eventName='" + eventName + '\'' + ", eventDate='" + eventDate + '\'' + ", description='"
                 + description + '\'' + '}');
     }
+
 }

@@ -20,6 +20,7 @@ public class TestEvent {
         assertEquals("John's college graduation", event.getDescription());
     }
 
+
     @Test
     public void testSetters() {
         event.setEventName("Birthday Party");
