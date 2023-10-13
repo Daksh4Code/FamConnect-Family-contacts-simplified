@@ -96,3 +96,30 @@ database. **(CUSTOM)**
 - As a user, I want to search for contacts 
 whose birthdays are coming up next.
 **(CUSTOM)**
+## In phase 1:
+- As a user, I want to be able to add new
+  individuals to my family contact database.
+  (**ADDING**) 
+- As a user, I want to create and include details
+  such as names, relationships, birthdays, emails,
+  phone numbers, and custom events
+  (e.g., graduation dates) when adding contacts.
+  (**ADDING**)
+- As a user, I want to view a list of all the
+  contacts and the information associated with
+  each of them in my family database. (**VIEWING**)
+- As a user, I want the ability to update
+  contact information, such as phone numbers or
+  email addresses, for any individual in my
+  database. **(CUSTOM)**
+## In phase 2:
+- As a user, when the 'quit' option is selected from
+the application's main menu, I want to be given the 
+option of saving the contacts and their added details 
+so far to a file. I also want to be given the option
+of not saving, if I wish to do so.
+- As a user, when I start the application, I want to 
+be given the option of reloading the contacts and 
+their details added so far from the file and resume
+from there. I also want to be given the option of 
+not reloading, if I wish to do so.
