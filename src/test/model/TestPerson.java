@@ -10,7 +10,7 @@ public class TestPerson {
     private Person person;
 
     @BeforeEach
-    public void setUp() {
+    public void runBefore() {
         person = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
     }
 

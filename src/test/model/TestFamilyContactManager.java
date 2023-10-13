@@ -10,7 +10,7 @@ public class TestFamilyContactManager {
     private FamilyContactManager contactManager;
 
     @BeforeEach
-    public void setUp() {
+    public void runBefore() {
         contactManager = new FamilyContactManager();
     }
 

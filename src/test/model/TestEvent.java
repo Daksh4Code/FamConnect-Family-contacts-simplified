@@ -8,7 +8,7 @@ public class TestEvent {
     private Event event;
 
     @BeforeEach
-    public void setUp() {
+    public void runBefore() {
         event = new Event("Graduation", "08/10/2026", "Lily's college graduation");
     }
 
