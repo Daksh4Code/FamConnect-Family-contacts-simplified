@@ -52,6 +52,7 @@ public class FamilyContactManagerApp {
     }
 
 
+    @SuppressWarnings("methodlength")
     private void addNewPerson() {
         System.out.print("Enter person's name: ");
         String name = scanner.nextLine();
@@ -80,25 +81,10 @@ public class FamilyContactManagerApp {
                 break;
             }
         }
-
         contactManager.addPerson(person);
-
         System.out.println("Person added successfully.");
     }
 
-
-    private void addCustomEventToPerson(Person person) {
-        System.out.print("Enter event name: ");
-        String eventName = scanner.nextLine();
-        System.out.print("Enter event date: ");
-        String eventDate = scanner.nextLine();
-        System.out.print("Enter event description: ");
-        String eventDescription = scanner.nextLine();
-
-        Event customEvent = new Event(eventName, eventDate, eventDescription);
-        person.addCustomEvent(customEvent);
-        System.out.println("Custom event added successfully.");
-    }
 
     private void viewAllContacts() {
         List<Person> contacts = contactManager.getAllContacts();
@@ -123,7 +109,7 @@ public class FamilyContactManagerApp {
         System.out.println("Person deleted successfully.");
     }
 
-
+    @SuppressWarnings("methodlength")
     private void updatePersonDetails() {
         System.out.print("Enter the name of the person to update: ");
         String name = scanner.nextLine();
