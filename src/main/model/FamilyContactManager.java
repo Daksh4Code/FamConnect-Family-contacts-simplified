@@ -5,96 +5,78 @@ import java.util.List;
 
 public class FamilyContactManager {
     private List<Person> familyContacts;
-    private List<Event> customEvents;
+    private List<Event> events;
 
     public FamilyContactManager() {
         familyContacts = new ArrayList<>();
-        customEvents = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     public void addPerson(Person person) {
         familyContacts.add(person);
     }
 
-    public void updatePersonDetails(String name, Person updatedPerson) {
-        // Find the person with the given name, if it exists
-        Person personToUpdate = null;
-        for (Person person : familyContacts) {
-            if (person.getName().equals(name)) {
-                personToUpdate = person;
-                break; // Exit the loop after finding the person
-            }
-        }
-
-        // Check if the person exists in the list
-        if (personToUpdate != null) {
-            // Update the person's details
-            personToUpdate.setName(updatedPerson.getName());
-            personToUpdate.setRelationship(updatedPerson.getRelationship());
-            personToUpdate.setBirthday(updatedPerson.getBirthday());
-            personToUpdate.setEmail(updatedPerson.getEmail());
-            personToUpdate.setPhoneNumber(updatedPerson.getPhoneNumber());
-        }
-        // If the person with the given name doesn't exist, do nothing (no exception is thrown)
+    public List<Person> getAllContacts() {
+        return familyContacts;
     }
-
 
     public void deletePerson(String name) {
-        familyContacts.removeIf(person -> person.getName().equals(name));
-    }
-
-    public void addEvent(Event event) {
-        customEvents.add(event);
-    }
-
-    public void updateEvent(String eventName, Event updatedEvent) {
-        for (int i = 0; i < customEvents.size(); i++) {
-            Event existingEvent = customEvents.get(i);
-            if (existingEvent.getEventName().equals(eventName)) {
-                customEvents.set(i, updatedEvent);
-                break;
-            }
+        Person person = getPersonByName(name);
+        if (person != null) {
+            familyContacts.remove(person);
         }
-    }
-
-    public void deleteEvent(String eventName) {
-        customEvents.removeIf(event -> event.getEventName().equals(eventName));
-    }
-
-    public List<Person> getAllContacts() {
-        return new ArrayList<>(familyContacts);
-    }
-
-    public List<Event> getAllEvents() {
-        return new ArrayList<>(customEvents);
     }
 
     public Person getPersonByName(String name) {
-        Person notFoundPerson = new Person("Not Found", "", "", "", ""); // Create a default Person object
         for (Person person : familyContacts) {
             if (person.getName().equals(name)) {
                 return person;
             }
         }
-        // Return the default Person object if the person with the given name is not found
-        return notFoundPerson;
+        return null; // Return null if the person with the given name is not found
     }
 
+    public void updatePersonDetails(String name, Person updatedPerson) {
+        Person person = getPersonByName(name);
+        if (person != null) {
+            // Update person's details
+            person.setRelationship(updatedPerson.getRelationship());
+            person.setBirthday(updatedPerson.getBirthday());
+            // Update more details as needed
+        }
+    }
 
-    public Event getEventByName(String name) {
-        Event notFoundEvent = new Event("Not Found", "", ""); // Create a default Event object
-        for (Event event : customEvents) {
-            if (event.getEventName().equals(name)) {
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public List<Event> getAllEvents() {
+        return events;
+    }
+
+    public void deleteEvent(String eventName) {
+        Event event = getEventByName(eventName);
+        if (event != null) {
+            events.remove(event);
+        }
+    }
+
+    public Event getEventByName(String eventName) {
+        for (Event event : events) {
+            if (event.getEventName().equals(eventName)) {
                 return event;
             }
         }
-        // Return the default Event object if the event with the given name is not found
-        return notFoundEvent;
+        return null; // Return null if the event with the given name is not found
     }
 
-
-
-
-
-
+    public void updateEvent(String eventName, Event updatedEvent) {
+        Event event = getEventByName(eventName);
+        if (event != null) {
+            // Update event's details
+            event.setEventDate(updatedEvent.getEventDate());
+            event.setDescription(updatedEvent.getDescription());
+            // Update more details as needed
+        }
+    }
 }

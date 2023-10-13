@@ -15,6 +15,12 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public Person(String name, String relation, String birthday) {
+        this.name = name;
+        this.relationship = relation;
+        this.birthday = birthday;
+    }
+
     public String getName() {
         return name;
     }
