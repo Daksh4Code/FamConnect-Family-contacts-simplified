@@ -46,8 +46,7 @@ public class FamilyContactManagerApp {
         System.out.println("2. View All Contacts");
         System.out.println("3. Delete Person");
         System.out.println("4. Update Person Details");
-        System.out.println("5. Add Custom Event");
-        System.out.println("6. Exit");
+        System.out.println("5. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -77,8 +76,10 @@ public class FamilyContactManagerApp {
                 String eventDescription = scanner.nextLine();
                 Event event = new Event(eventName, eventDate, eventDescription);
                 person.addCustomEvent(event);
-            } else {
+            } else if (choice.equalsIgnoreCase("no")) {
                 break;
+            } else {
+                System.out.println("Invalid choice. Please try again.");
             }
         }
         contactManager.addPerson(person);
@@ -88,6 +89,9 @@ public class FamilyContactManagerApp {
 
     private void viewAllContacts() {
         List<Person> contacts = contactManager.getAllContacts();
+        if (contacts.isEmpty()) {
+            System.out.println("No contacts found.");
+        }
         System.out.println("All Contacts:");
         for (Person contact : contacts) {
             System.out.println(contact);
@@ -158,8 +162,4 @@ public class FamilyContactManagerApp {
         }
     }
 
-    public static void main(String[] args) {
-        FamilyContactManagerApp app = new FamilyContactManagerApp();
-        app.start();
-    }
 }
