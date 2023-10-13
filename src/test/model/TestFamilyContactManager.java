@@ -85,28 +85,14 @@ public class TestFamilyContactManager {
         contactManager.deleteEvent("Birthday");
         assertEquals(0, contactManager.getAllEvents().size());
     }
-/*
+
     @Test
     public void testUpdatePersonDetailsWithNullPerson() {
         Person person = null;
         contactManager.updatePersonDetails("John", person);
         assertNull(person);
     }
-    @Test
-    public void testContactManagerEquals() {
-        FamilyContactManager sameContactManager = new FamilyContactManager();
-        sameContactManager.addPerson(new Person("Alice", "Sister", "02/20/1985", "alice@email.com", "987-654-3210"));
-        sameContactManager.addEvent(new Event("Birthday Party", "03/10/2023", "Alice's birthday celebration"));
-        FamilyContactManager differentContactManager = new FamilyContactManager();
-        assertTrue(contactManager.equals(contactManager));
-        assertFalse(contactManager.equals(sameContactManager));
-        assertFalse(contactManager.equals(differentContactManager));
-        assertFalse(contactManager.equals(null));
-        assertFalse(contactManager.equals(new Object()));
-        FamilyContactManager sameObject = contactManager;
-        assertTrue(contactManager.equals(sameObject));
-    }
-    */
+
 
     @Test
     public void testGetPersonByNameNotFound() {
