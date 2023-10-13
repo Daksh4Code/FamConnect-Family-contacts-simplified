@@ -1,18 +1,23 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
     private String name;
     private String relationship;
     private String birthday;
     private String email;
     private String phoneNumber;
+    private List<Event> customEvents;
 
-    public Person(String name, String relationship, String birthday, String email, String phoneNumber) {
+    public Person(String name, String relation, String birthday, String email, String phoneNumber) {
         this.name = name;
-        this.relationship = relationship;
+        this.relationship = relation;
         this.birthday = birthday;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.customEvents = new ArrayList<>();
     }
 
     public Person(String name, String relation, String birthday) {
@@ -61,11 +66,56 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Event> getCustomEvents() {
+        return customEvents;
+    }
+
+    public void addCustomEvent(Event event) {
+        customEvents.add(event);
+    }
+
+    public void removeCustomEvent(Event event) {
+        customEvents.remove(event);
+    }
+
+    public void updateCustomEvent(String eventName, String newEventDate, String newDescription) {
+        for (Event event : customEvents) {
+            if (event.getEventName().equals(eventName)) {
+                event.setEventDate(newEventDate);
+                event.setDescription(newDescription);
+                return;
+            }
+        }
+    }
+
+    public Event getCustomEventByName(String eventName) {
+        for (Event event : customEvents) {
+            if (event.getEventName().equals(eventName)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
-        return "Person{" + "name='" + name + '\'' + ", relationship='"
-                + relationship + '\'' + ", birthday='" + birthday + '\''
-                + ", email='" + email + '\'' + ", phoneNumber='" + phoneNumber
-                + '\'' + '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append("Person{name='").append(name).append('\'');
+        builder.append(", relationship='").append(relationship).append('\'');
+        builder.append(", birthday='").append(birthday).append('\'');
+        builder.append(", email='").append(email).append('\'');
+        builder.append(", phoneNumber='").append(phoneNumber).append('\'');
+
+        if (!customEvents.isEmpty()) {
+            builder.append(", customEvents=[");
+            for (Event event : customEvents) {
+                builder.append(event.getEventName()).append(", ");
+            }
+            builder.setLength(builder.length() - 2);
+            builder.append("]");
+        }
+
+        builder.append('}');
+        return builder.toString();
     }
 }
