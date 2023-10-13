@@ -86,22 +86,25 @@ public class Person {
 
     @Override
     public String toString() {
-        String result = "Person{name='" + name + '\''
-                + "', " +  "relationship='"
-                + relationship + '\''
-                + "', " + "birthday='" + birthday + "', " + "email='" + email + "', " + "phoneNumber='" + phoneNumber;
+        String result = "Person{name='" + name
+                + "', relationship='" + relationship + "', birthday='"
+                + birthday + "', email='" + email + "', phoneNumber='" + phoneNumber;
 
         if (!customEvents.isEmpty()) {
-            result += "customEvents=[";
+            result += ", customEvents=[";
+            boolean first = true;
             for (Event event : customEvents) {
-                result += event.getEventName() + ", ";
+                if (!first) {
+                    result += ", ";
+                }
+                result += event.getEventName();
+                first = false;
             }
-            result = result.substring(0, result.length() - 2);
             result += "]";
         }
-
         result += "}";
         return result;
     }
+
 
 }

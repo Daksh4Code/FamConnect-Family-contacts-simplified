@@ -1,6 +1,9 @@
 package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPerson {
@@ -45,4 +48,71 @@ public class TestPerson {
         assertNull(personWithRelation.getEmail()); // The email and phone number should be null
         assertNull(personWithRelation.getPhoneNumber());
     }
+
+    @Test
+    public void testAddCustomEvent() {
+        Event event1 = new Event("Graduation", "05/20/2023", "John's college graduation");
+        person.addCustomEvent(event1);
+        assertEquals(1, person.getCustomEvents().size());
+
+        Event event2 = new Event("Anniversary", "06/10/2023", "John and Emily's anniversary");
+        person.addCustomEvent(event2);
+        assertEquals(2, person.getCustomEvents().size());
+    }
+
+    @Test
+    public void testGetCustomEventByName() {
+        Event event1 = new Event("Graduation", "05/20/2023", "John's college graduation");
+        Event event2 = new Event("Anniversary", "06/10/2023", "John and Emily's anniversary");
+
+        person.addCustomEvent(event1);
+        person.addCustomEvent(event2);
+
+        Event foundEvent = person.getCustomEventByName("Graduation");
+        assertNotNull(foundEvent);
+        assertEquals("Graduation", foundEvent.getEventName());
+
+        Event nonExistentEvent = person.getCustomEventByName("Birthday");
+        assertNull(nonExistentEvent);
+    }
+
+    @Test
+    public void testToStringWithNoCustomEvents() {
+        String expected = "Person{name='John', relationship='Brother', birthday='01/15/1980', email='john@email.com', phoneNumber='123-456-7890}";
+        assertEquals(expected, person.toString());
+    }
+
+    @Test
+    public void testToStringWithCustomEvents() {
+        Event event1 = new Event("Graduation", "05/20/2023", "John's college graduation");
+        Event event2 = new Event("Anniversary", "06/10/2023", "John and Emily's anniversary");
+
+        person.addCustomEvent(event1);
+        person.addCustomEvent(event2);
+
+        String expected = "Person{name='John', relationship='Brother', birthday='01/15/1980', email='john@email.com', phoneNumber='123-456-7890, customEvents=[Graduation, Anniversary]}";
+        assertEquals(expected, person.toString());
+    }
+
+
+
+    @Test
+    public void testGetCustomEvents() {
+        Event event1 = new Event("Graduation", "05/20/2023", "John's college graduation");
+        Event event2 = new Event("Anniversary", "06/10/2023", "John and Emily's anniversary");
+
+        person.addCustomEvent(event1);
+        person.addCustomEvent(event2);
+
+        List<Event> customEvents = person.getCustomEvents();
+
+        // Ensure that the list of custom events contains the added events
+        assertTrue(customEvents.contains(event1));
+        assertTrue(customEvents.contains(event2));
+
+        // Ensure the size of the list matches the number of added events
+        assertEquals(2, customEvents.size());
+    }
+
+
 }
