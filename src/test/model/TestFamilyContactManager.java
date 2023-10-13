@@ -98,4 +98,58 @@ public class TestFamilyContactManager {
         FamilyContactManager sameObject = contactManager;
         assertTrue(contactManager.equals(sameObject));
     }
+
+    @Test
+    public void testGetPersonByName() {
+        FamilyContactManager contactManager = new FamilyContactManager();
+
+        // Add some persons to the contact manager
+        Person person1 = new Person("Alice", "Sister", "2000-01-01", "alice@example.com", "123-456-7890");
+        Person person2 = new Person("Bob", "Brother", "2001-02-02", "bob@example.com", "987-654-3210");
+        contactManager.addPerson(person1);
+        contactManager.addPerson(person2);
+
+        // Test when the person exists in the contact manager
+        Person resultAlice = contactManager.getPersonByName("Alice");
+        Person resultBob = contactManager.getPersonByName("Bob");
+
+        assertNotNull(resultAlice);
+        assertNotNull(resultBob);
+        assertEquals("Alice", resultAlice.getName());
+        assertEquals("Bob", resultBob.getName());
+
+        // Test when the person does not exist in the contact manager
+        Person resultNotFound = contactManager.getPersonByName("Carol");
+
+        assertNotNull(resultNotFound);
+        assertEquals("Not Found", resultNotFound.getName());
+    }
+
+    @Test
+    public void testGetEventByName() {
+        FamilyContactManager contactManager = new FamilyContactManager();
+
+        // Add some events to the contact manager
+        Event event1 = new Event("Birthday", "2023-01-01", "Party");
+        Event event2 = new Event("Graduation", "2023-06-30", "Congratulations");
+        contactManager.addEvent(event1);
+        contactManager.addEvent(event2);
+
+        // Test when the event exists in the contact manager
+        Event resultBirthday = contactManager.getEventByName("Birthday");
+        Event resultGraduation = contactManager.getEventByName("Graduation");
+
+        assertNotNull(resultBirthday);
+        assertNotNull(resultGraduation);
+        assertEquals("Birthday", resultBirthday.getEventName());
+        assertEquals("Graduation", resultGraduation.getEventName());
+
+        // Test when the event does not exist in the contact manager
+        Event resultNotFound = contactManager.getEventByName("Anniversary");
+
+        assertNotNull(resultNotFound);
+        assertEquals("Not Found", resultNotFound.getEventName());
+    }
+
+
 }

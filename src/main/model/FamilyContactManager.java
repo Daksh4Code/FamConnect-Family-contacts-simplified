@@ -70,22 +70,28 @@ public class FamilyContactManager {
     }
 
     public Person getPersonByName(String name) {
+        Person notFoundPerson = new Person("Not Found", "", "", "", ""); // Create a default Person object
         for (Person person : familyContacts) {
             if (person.getName().equals(name)) {
                 return person;
             }
         }
-        return null; // Return null if the person with the given name is not found
+        // Return the default Person object if the person with the given name is not found
+        return notFoundPerson;
     }
 
+
     public Event getEventByName(String name) {
+        Event notFoundEvent = new Event("Not Found", "", ""); // Create a default Event object
         for (Event event : customEvents) {
             if (event.getEventName().equals(name)) {
                 return event;
             }
         }
-        return null; // Return null if the event with the given name is not found
+        // Return the default Event object if the event with the given name is not found
+        return notFoundEvent;
     }
+
 
 
 
