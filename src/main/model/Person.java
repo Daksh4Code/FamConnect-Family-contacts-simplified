@@ -74,19 +74,6 @@ public class Person {
         customEvents.add(event);
     }
 
-    public void removeCustomEvent(Event event) {
-        customEvents.remove(event);
-    }
-
-    public void updateCustomEvent(String eventName, String newEventDate, String newDescription) {
-        for (Event event : customEvents) {
-            if (event.getEventName().equals(eventName)) {
-                event.setEventDate(newEventDate);
-                event.setDescription(newDescription);
-                return;
-            }
-        }
-    }
 
     public Event getCustomEventByName(String eventName) {
         for (Event event : customEvents) {
