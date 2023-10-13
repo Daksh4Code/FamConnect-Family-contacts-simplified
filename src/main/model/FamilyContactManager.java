@@ -33,16 +33,14 @@ public class FamilyContactManager {
                 return person;
             }
         }
-        return null; // Return null if the person with the given name is not found
+        return null;
     }
 
     public void updatePersonDetails(String name, Person updatedPerson) {
         Person person = getPersonByName(name);
         if (person != null) {
-            // Update person's details
             person.setRelationship(updatedPerson.getRelationship());
             person.setBirthday(updatedPerson.getBirthday());
-            // Update more details as needed
         }
     }
 
@@ -67,7 +65,7 @@ public class FamilyContactManager {
                 return event;
             }
         }
-        return null; // Return null if the event with the given name is not found
+        return null;
     }
 
     public void updateEvent(String eventName, Event updatedEvent) {
@@ -76,7 +74,6 @@ public class FamilyContactManager {
             // Update event's details
             event.setEventDate(updatedEvent.getEventDate());
             event.setDescription(updatedEvent.getDescription());
-            // Update more details as needed
         }
     }
 }

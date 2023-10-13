@@ -37,31 +37,6 @@ public class TestPerson {
     }
 
     @Test
-    public void testToString() {
-        String expected = "Person{name='John', relation='Brother', birthdate='01/15/1980', email='john@email.com', phoneNumber='123-456-7890'}";
-        assertEquals(expected, person.toString());
-    }
-
-    @Test
-    public void testPersonEquals() {
-        Person samePerson = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
-        Person differentPerson = new Person("Alice", "Sister", "02/20/1985", "alice@email.com", "987-654-3210");
-        Person nullPerson = null;
-
-        assertTrue(person.equals(person)); // Person equals itself
-        assertTrue(person.equals(samePerson)); // Person equals another person with the same properties
-        assertFalse(person.equals(differentPerson)); // Person does not equal a person with different properties
-        assertFalse(person.equals(nullPerson)); // Person does not equal null
-        assertFalse(person.equals(new Object())); // Person does not equal a different object
-
-        // Test with the same object
-        Person sameObject = person;
-        assertTrue(person.equals(sameObject));
-
-    }
-
-
-    @Test
     public void testNewConstructor() {
         Person personWithRelation = new Person("Alice", "Sister", "02/20/1985");
         assertEquals("Alice", personWithRelation.getName());

@@ -1,4 +1,4 @@
-package model;  // Ensure it's in the correct package
+package model;
 
 public class Event {
     private String eventName;
@@ -37,8 +37,8 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" + "eventName='" + eventName + '\''
+        return ("Event{" + "eventName='" + eventName + '\''
                 + ", eventDate='" + eventDate + '\'' + ", description='"
-                + description + '\'' + '}';
+                + description + '\'' + '}');
     }
 }

@@ -86,23 +86,22 @@ public class Person {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Person{name='").append(name).append('\'');
-        builder.append(", relationship='").append(relationship).append('\'');
-        builder.append(", birthday='").append(birthday).append('\'');
-        builder.append(", email='").append(email).append('\'');
-        builder.append(", phoneNumber='").append(phoneNumber).append('\'');
+        String result = "Person{name='" + name + '\''
+                + "', " +  "relationship='"
+                + relationship + '\''
+                + "', " + "birthday='" + birthday + "', " + "email='" + email + "', " + "phoneNumber='" + phoneNumber;
 
         if (!customEvents.isEmpty()) {
-            builder.append(", customEvents=[");
+            result += "customEvents=[";
             for (Event event : customEvents) {
-                builder.append(event.getEventName()).append(", ");
+                result += event.getEventName() + ", ";
             }
-            builder.setLength(builder.length() - 2);
-            builder.append("]");
+            result = result.substring(0, result.length() - 2);
+            result += "]";
         }
 
-        builder.append('}');
-        return builder.toString();
+        result += "}";
+        return result;
     }
+
 }
