@@ -96,3 +96,19 @@ database. **(CUSTOM)**
 - As a user, I want to search for contacts 
 whose birthdays are coming up next.
 **(CUSTOM)**
+## In phase 1:
+- As a user, I want to be able to add new
+  individuals to my family contact database.
+  (**ADDING**) 
+- As a user, I want to create and include details
+  such as names, relationships, birthdays, emails,
+  phone numbers, and custom events
+  (e.g., graduation dates) when adding contacts.
+  (**ADDING**)
+- As a user, I want to view a list of all the
+  contacts and the information associated with
+  each of them in my family database. (**VIEWING**)
+- As a user, I want the ability to update
+  contact information, such as phone numbers or
+  email addresses, for any individual in my
+  database. **(CUSTOM)**
