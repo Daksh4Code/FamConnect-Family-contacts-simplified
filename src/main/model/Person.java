@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 // The 'Person' class represents an individual person in the family contact management system.
 // It contains information about a person including their name, relationship to the user, birthday,
 // email, phone number, and any custom events associated with them which the user chooses to add.
@@ -87,7 +86,7 @@ public class Person {
 
     // REQUIRES: 'event' should not be null
     // MODIFIES: this
-    // EFFECTS: Adds a custom event to the list of custom events of the person
+    // EFFECTS: Adds a custom event to the list of custom events associated with the person
     public void addCustomEvent(Event event) {
         this.customEvents.add(event);
     }
@@ -107,14 +106,14 @@ public class Person {
 
     // REQUIRES: None
     // MODIFIES: None
-    // EFFECTS: Retrieves and returns a string representation of the person, including their name,
-    // relationship, birthday, email, phone number, and a list of custom events - if any.
+    // EFFECTS: Retrieves and returns a well formatted string representation of the person,
+    // including their name, relationship, birthday, email, phone number, and a list of
+    // custom events - if any are associated with the person.
     @Override
     public String toString() {
         String result = "Person{Name='" + this.name  + "', Relationship='"
                 + this.relationship + "', Birthday='" + this.birthday
                 + "', Email='" + this.email + "', Phone Number='" + this.phoneNumber;
-
         if (!this.customEvents.isEmpty()) {
             result += ", Custom Events=[";
             boolean bool = true;

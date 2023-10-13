@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class TestFamilyContactManager {
-
     private FamilyContactManager contactManager;
 
     @BeforeEach
@@ -46,7 +45,7 @@ public class TestFamilyContactManager {
     public void testUpdatePersonDetails() {
         Person person = new Person("John", "Brother", "01/19/1985", "john@email.com", "123-456-7890");
         contactManager.addPerson(person);
-        Person updatedPerson = new Person("John", "Brother", "02/19/1985", "new@email.com", "987-654-3210");
+        Person updatedPerson = new Person("John", "Brother", "02/19/1985", "updatedPerson@email.com", "987-654-3210");
         contactManager.updatePersonDetails("John", updatedPerson);
         Person retrievedPerson = contactManager.getPersonByName("John");
         assertEquals("john@email.com", retrievedPerson.getEmail());
@@ -130,7 +129,7 @@ public class TestFamilyContactManager {
 
     @Test
     public void testAddMultipleEvents() {
-        Event event1 = new Event("Birthday Party", "03/10/2023", "Alice's birthday celebration");
+        Event event1 = new Event("Birthday party", "03/10/2023", "Alice's birthday celebration");
         Event event2 = new Event("Anniversary", "05/15/2023", "Anniversary celebration");
         contactManager.addEvent(event1);
         contactManager.addEvent(event2);
@@ -142,7 +141,7 @@ public class TestFamilyContactManager {
 
     @Test
     public void testUpdateNonExistentEvent() {
-        Event updatedEvent = new Event("Anniversary", "05/15/2023", "Family anniversary celebration");
+        Event updatedEvent = new Event("Anniversary", "05/15/2023", "Anniversary celebration");
         contactManager.updateEvent("Anniversary", updatedEvent);
         List<Event> events = contactManager.getAllEvents();
         assertTrue(events.isEmpty());
@@ -150,18 +149,18 @@ public class TestFamilyContactManager {
 
     @Test
     public void testUpdateNullEvent() {
-        contactManager.updateEvent("Birthday Party", null);
+        contactManager.updateEvent("Birthday party", null);
         List<Event> events = contactManager.getAllEvents();
         assertTrue(events.isEmpty());
     }
 
     @Test
     public void testUpdateEventDescription() {
-        Event event = new Event("Birthday Party", "03/10/2023", "Alice's birthday celebration");
+        Event event = new Event("Birthday party", "03/10/2023", "Alice's birthday celebration");
         contactManager.addEvent(event);
-        Event updatedEvent = new Event("Birthday Party", "03/10/2023", "Updated description of party");
-        contactManager.updateEvent("Birthday Party", updatedEvent);
-        Event gotEvent = contactManager.getEventByName("Birthday Party");
+        Event updatedEvent = new Event("Birthday party", "03/10/2023", "Updated description of party");
+        contactManager.updateEvent("Birthday party", updatedEvent);
+        Event gotEvent = contactManager.getEventByName("Birthday party");
         assertEquals("Updated description of party", gotEvent.getDescription());
     }
 
@@ -173,7 +172,7 @@ public class TestFamilyContactManager {
 
     @Test
     public void testGetEventByName() {
-        Event event1 = new Event("Birthday", "2023-01-01", "Party time");
+        Event event1 = new Event("Birthday", "2023-01-01", "party time");
         Event event2 = new Event("Graduation", "2023-06-30", "College graduation");
         Event event3 = new Event("Anniversary", "2023-04-15", "Anniversary celebration");
         contactManager.addEvent(event1);
@@ -183,7 +182,7 @@ public class TestFamilyContactManager {
         assertNotNull(gotEvent1);
         assertEquals("Birthday", gotEvent1.getEventName());
         assertEquals("2023-01-01", gotEvent1.getEventDate());
-        assertEquals("Party time", gotEvent1.getDescription());
+        assertEquals("party time", gotEvent1.getDescription());
         Event gotEvent2 = contactManager.getEventByName("Anniversary");
         assertNotNull(gotEvent2);
         assertEquals("Anniversary", gotEvent2.getEventName());

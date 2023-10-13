@@ -7,53 +7,74 @@ import model.Person;
 import java.util.List;
 import java.util.Scanner;
 
-
+// The 'FamilyContactManagerApp' class represents an application for managing family contacts and
+// the custom events associated with them.
+// It provides a menu-driven interface to add, view, update, and delete family contacts and any
+// custom events associated with each unique Person object.
 public class FamilyContactManagerApp {
     private FamilyContactManager contactManager;
     private Scanner scanner;
 
+    // REQUIRES: None
+    // MODIFIES: this
+    // EFFECTS: Constructs a FamilyContactManagerApp object by initializing the
+    // objects for 'FamilyContactManager' class and 'Scanner' class to take user input
     public FamilyContactManagerApp() {
         contactManager = new FamilyContactManager();
         scanner = new Scanner(System.in);
     }
 
+    // REQUIRES: None
+    // MODIFIES: this
+    // EFFECTS: Starts the Family Contact Manager application and displays a menu which
+    // processes and performs functions based on user input until the user chooses to exit
+    // An error message is displayed for any option entered which is not in the menu
     public void start() {
+        System.out.println("Welcome to FamConnect Version 1! ");
+        System.out.println("Your personal family contact manager awaits you.");
         boolean isRunning = true;
-
         while (isRunning) {
+
             displayMenu();
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            scanner.nextLine();
             if (choice == 1) {
-                addNewPerson();
+                addNewContact();
             } else if (choice == 2) {
                 viewAllContacts();
             } else if (choice == 3) {
-                deletePerson();
+                deleteContact();
             } else if (choice == 4) {
-                updatePersonDetails();
+                updateContactDetails();
             } else if (choice == 5) {
                 isRunning = false;
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println("Invalid choice! Please try again.");
             }
         }
     }
 
+    // REQUIRES: None
+    // MODIFIES: None
+    // EFFECTS: Displays a menu with options and asks the user to enter a choice
     private void displayMenu() {
-        System.out.println("Family Contact Manager");
-        System.out.println("1. Add New Person");
-        System.out.println("2. View All Contacts");
-        System.out.println("3. Delete Person");
-        System.out.println("4. Update Person Details");
+
+        System.out.println("Please choose from the following menu: ");
+        System.out.println("1. Add new contact");
+        System.out.println("2. View all contacts");
+        System.out.println("3. Delete contact");
+        System.out.println("4. Update contact details");
         System.out.println("5. Exit");
         System.out.print("Enter your choice: ");
     }
 
-
+    // REQUIRES: Contact details are case-sensitive and to be in proper format and readable
+    // MODIFIES: None
+    // EFFECTS:  Creates a new 'Person' object, adds it to the 'contactManager' based
+    // on the inputs of the contact details entered by the user
+    // Also allows the user to add custom events if desired
     @SuppressWarnings("methodlength")
-    private void addNewPerson() {
+    private void addNewContact() {
         System.out.print("Enter person's name: ");
         String name = scanner.nextLine();
         System.out.print("Enter person's relation: ");
@@ -66,28 +87,31 @@ public class FamilyContactManagerApp {
         String phoneNumber = scanner.nextLine();
         Person person = new Person(name, relation, birthday, email, phoneNumber);
         while (true) {
-            System.out.print("Add a custom event? (yes/no): ");
+            System.out.print("Do you wish to add a custom event? (y/n): ");
             String choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("yes")) {
-                System.out.print("Enter event name: ");
+            if (choice.equalsIgnoreCase("y")) {
+                System.out.print("Enter custom event name: ");
                 String eventName = scanner.nextLine();
-                System.out.print("Enter event date: ");
+                System.out.print("Enter custom event date: ");
                 String eventDate = scanner.nextLine();
-                System.out.print("Enter event description: ");
+                System.out.print("Enter custom event description: ");
                 String eventDescription = scanner.nextLine();
                 Event event = new Event(eventName, eventDate, eventDescription);
                 person.addCustomEvent(event);
-            } else if (choice.equalsIgnoreCase("no")) {
+            } else if (choice.equalsIgnoreCase("n")) {
                 break;
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println("Invalid choice! Please try again.");
             }
         }
         contactManager.addPerson(person);
-        System.out.println("Person added successfully.");
+        System.out.println("Contact added successfully!");
     }
 
-
+    // REQUIRES: None
+    // MODIFIES: None
+    // EFFECTS: Returns and retrieves the list of family contacts and custom events associated with
+    // unique contacts and displays them as output
     private void viewAllContacts() {
         List<Person> contacts = contactManager.getAllContacts();
         if (contacts.isEmpty()) {
@@ -106,60 +130,69 @@ public class FamilyContactManagerApp {
         }
     }
 
-
-    private void deletePerson() {
-        System.out.print("Enter the name of the person to delete: ");
+    // REQUIRES: contact name should exist in contact list already
+    // MODIFIES: this
+    // EFFECTS: Removes the specified contact from 'contactManager'
+    private void deleteContact() {
+        System.out.print("Enter the name of the contact to be deleted: ");
         String name = scanner.nextLine();
         contactManager.deletePerson(name);
-        System.out.println("Person deleted successfully.");
+        System.out.println("Contact deleted successfully.");
     }
 
+    // REQUIRES: inputs should be case-sensitive
+    // MODIFIES: this
+    // EFFECTS: Enables user to update the relationship, birthday, email, and phone number of a
+    // contact
+    // Also provides option to update unique custom events associated with the contact.
+
     @SuppressWarnings("methodlength")
-    private void updatePersonDetails() {
-        System.out.print("Enter the name of the person to update: ");
-        String name = scanner.nextLine();
-        Person person = contactManager.getPersonByName(name);
+    private void updateContactDetails() {
+        System.out.print("Enter the name of the contact to update: ");
+        String name = this.scanner.nextLine();
+        Person person = this.contactManager.getPersonByName(name);
         if (person != null) {
-            System.out.println("Current Details:");
+            System.out.println("Current contact details:");
             System.out.println(person);
             System.out.print("Enter new relation: ");
-            String relation = scanner.nextLine();
+            String relation = this.scanner.nextLine();
             System.out.print("Enter new birthday: ");
-            String birthday = scanner.nextLine();
+            String birthday = this.scanner.nextLine();
             System.out.print("Enter new email: ");
-            String email = scanner.nextLine();
+            String email = this.scanner.nextLine();
             System.out.print("Enter new phone number: ");
-            String phoneNumber = scanner.nextLine();
+            String phoneNumber = this.scanner.nextLine();
             while (true) {
-                System.out.print("Update custom events? (yes/no): ");
+                System.out.print("Update custom events? (y/n): ");
                 String choice = scanner.nextLine();
-                if (choice.equalsIgnoreCase("yes")) {
+                if (choice.equalsIgnoreCase("y")) {
                     System.out.print("Enter event name: ");
                     String eventName = scanner.nextLine();
                     Event existingEvent = person.getCustomEventByName(eventName);
-
                     if (existingEvent != null) {
                         System.out.print("Enter updated event date: ");
-                        String eventDate = scanner.nextLine();
+                        String eventDate = this.scanner.nextLine();
                         System.out.print("Enter updated event description: ");
-                        String eventDescription = scanner.nextLine();
+                        String eventDescription = this.scanner.nextLine();
                         existingEvent.setEventDate(eventDate);
                         existingEvent.setDescription(eventDescription);
                         System.out.println("Custom event updated successfully.");
                     } else {
                         System.out.println("Event not found for this person.");
                     }
-                } else {
+                } else if (choice.equalsIgnoreCase("n")) {
                     break;
+                } else {
+                    System.out.print("Invalid choice! Please try again.");
                 }
             }
             person.setRelationship(relation);
             person.setBirthday(birthday);
             person.setEmail(email);
             person.setPhoneNumber(phoneNumber);
-            System.out.println("Details updated successfully.");
+            System.out.println("Contact details updated successfully.");
         } else {
-            System.out.println("Person not found.");
+            System.out.println("Contact not found.");
         }
     }
 
