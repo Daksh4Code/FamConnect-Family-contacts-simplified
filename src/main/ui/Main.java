@@ -1,4 +1,4 @@
-package ui;  // Ensure it's in the correct package
+package ui;
 
 public class    Main {
     public static void main(String[] args) {

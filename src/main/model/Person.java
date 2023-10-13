@@ -9,7 +9,7 @@ import java.util.List;
 // email, phone number, and any custom events associated with them which the user chooses to add.
 // Custom events are unique to a person, and can include anything from anniversaries to graduation
 // ceremonies.
-// It provides methods to set and retrieve the person's attributes
+// This class provides methods to set and retrieve the person's attributes
 public class Person {
     private String name;
     private String relationship;
@@ -42,7 +42,7 @@ public class Person {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -50,7 +50,7 @@ public class Person {
     }
 
     public String getRelationship() {
-        return relationship;
+        return this.relationship;
     }
 
     public void setRelationship(String relationship) {
@@ -58,7 +58,7 @@ public class Person {
     }
 
     public String getBirthday() {
-        return birthday;
+        return this.birthday;
     }
 
     public void setBirthday(String birthday) {
@@ -66,7 +66,7 @@ public class Person {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -74,7 +74,7 @@ public class Person {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -82,14 +82,20 @@ public class Person {
     }
 
     public List<Event> getCustomEvents() {
-        return customEvents;
+        return this.customEvents;
     }
 
+    // REQUIRES: 'event' should not be null
+    // MODIFIES: this
+    // EFFECTS: Adds a custom event to the list of custom events of the person
     public void addCustomEvent(Event event) {
-        customEvents.add(event);
+        this.customEvents.add(event);
     }
 
-
+    // REQUIRES: 'eventName' should not be null
+    // MODIFIES: None
+    // EFFECTS: Retrieves and returns a custom event by its specified event name from the person's
+    // list of custom events
     public Event getCustomEventByName(String eventName) {
         for (Event event : customEvents) {
             if (event.getEventName().equals(eventName)) {
@@ -99,27 +105,29 @@ public class Person {
         return null;
     }
 
+    // REQUIRES: None
+    // MODIFIES: None
+    // EFFECTS: Retrieves and returns a string representation of the person, including their name,
+    // relationship, birthday, email, phone number, and a list of custom events - if any.
     @Override
     public String toString() {
-        String result = "Person{name='" + name
-                + "', relationship='" + relationship + "', birthday='"
-                + birthday + "', email='" + email + "', phoneNumber='" + phoneNumber;
+        String result = "Person{name='" + this.name  + "', relationship='"
+                + this.relationship + "', birthday='" + this.birthday
+                + "', email='" + this.email + "', phoneNumber='" + this.phoneNumber;
 
         if (!customEvents.isEmpty()) {
             result += ", customEvents=[";
-            boolean first = true;
+            boolean bool = true;
             for (Event event : customEvents) {
-                if (!first) {
+                if (!bool) {
                     result += ", ";
                 }
                 result += event.getEventName();
-                first = false;
+                bool = false;
             }
             result += "]";
         }
         result += "}";
         return result;
     }
-
-
 }

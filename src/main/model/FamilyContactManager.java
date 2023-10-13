@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// The `FamilyContactManager` class manages family contacts and events in a contact management system.
+// The 'FamilyContactManager' class manages family contacts and events in a contact management system.
 // It contains a list of all family contacts and a list of all events.
 // It provides methods to add, retrieve, delete, update, and list family contacts and events related to
 // each contact.

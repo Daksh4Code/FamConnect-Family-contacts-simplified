@@ -7,6 +7,7 @@ import model.Person;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class FamilyContactManagerApp {
     private FamilyContactManager contactManager;
     private Scanner scanner;

@@ -37,7 +37,7 @@ public class TestEvent {
     @Test
     public void testToString() {
         Event event = new Event("Birthday Party", "03/10/2023", "Alice's birthday celebration");
-        String expected = "Event{eventName='Birthday Party', eventDate='03/10/2023', description='Alice's birthday celebration'}";
+        String expected = "Event{Event Name='Birthday Party', Event Date='03/10/2023', Event Description='Alice's birthday celebration'}";
         assertEquals(expected, event.toString());
     }
 

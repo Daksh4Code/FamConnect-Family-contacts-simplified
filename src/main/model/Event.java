@@ -6,20 +6,20 @@ package model;
 // by strings.
 // A standard event (or more) like a birthday or a custom event created by the user can be added to a
 // person's profile (the person object) to keep track of events and their dates.
-// This class provides methods to set and retrieve the event attributes
+// This class provides methods to set and retrieve the event attributes.
 public class Event {
     private String eventName;
     private String eventDate;
-    private String description;
+    private String eventDescription;
 
     // REQUIRES: None
     // MODIFIES: this
     // EFFECTS: Constructs an Event object with given event name, event date and event
     // description (all in String format)
-    public Event(String eventName, String eventDate, String description) {
+    public Event(String eventName, String eventDate, String eventDescription) {
         this.eventName = eventName;
         this.eventDate = eventDate;
-        this.description = description;
+        this.eventDescription = eventDescription;
     }
 
     public String getEventName() {
@@ -39,11 +39,11 @@ public class Event {
     }
 
     public String getDescription() {
-        return this.description;
+        return this.eventDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     // REQUIRES: None
@@ -52,9 +52,9 @@ public class Event {
     // description within a single curly bracket
     @Override
     public String toString() {
-        return ("Event{" + "eventName='" + this.eventName + '\'' + ", eventDate='"
-                + this.eventDate + '\'' + ", description='"
-                + this.description + '\'' + '}');
+        return ("Event{" + "Event Name='" + this.eventName
+                + '\'' + ", Event Date='" + this.eventDate + '\''
+                + ", Event Description='" + this.eventDescription + '\'' + '}');
     }
 
 }
