@@ -60,6 +60,7 @@ public class TestPerson {
 
     }
 
+
     @Test
     public void testNewConstructor() {
         Person personWithRelation = new Person("Alice", "Sister", "02/20/1985");
