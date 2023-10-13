@@ -189,7 +189,17 @@ public class TestFamilyContactManager {
 
         // Test updating a person's details when the updatedPerson is null
         contactManager.updatePersonDetails("John", null);
-        assertEquals("another@email.com", retrievedPerson.getEmail()); // Ensure email remains unchanged
+        assertEquals("another@email.com", retrievedPerson.getEmail());// Ensure email remains unchanged
+
+        // Test updating a person's details when the person is null
+        Person personNull = null;
+        assertNull(personNull);
+
+        // Create a person and then update it with a null person
+        Person randomPerson = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
+        contactManager.addPerson(randomPerson);
+        contactManager.updatePersonDetails("John", personNull);
+
     }
 
 
