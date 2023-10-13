@@ -57,6 +57,7 @@ public class TestPerson {
         // Test with the same object
         Person sameObject = person;
         assertTrue(person.equals(sameObject));
+
     }
 
     @Test
