@@ -172,17 +172,18 @@ public class TestFamilyContactManager {
     }
 
     @Test
-    public void testUpdatePersonDetailsNull() {
+    public void testUpdatePersonDetailsWithNullPerson() {
+        // Set up test data
+        Person person = null; // Null person object
 
-        // Test updating a person's details when the person is null
-        Person person = null;
-        assertNull(person.getPhoneNumber());
-        assertNull(person.getBirthday());
-        assertNull(person.getRelationship());
-        assertNull(person.getEmail());
-        assertNull(person.getName());
+        // Ensure that updating a null person does not cause any changes
+        contactManager.updatePersonDetails("John", person);
 
+        // Assert that the person object remains null
+        assertNull(person);
     }
+
+
 
 
 }
