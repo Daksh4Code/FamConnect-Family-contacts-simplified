@@ -237,19 +237,39 @@ public class TestFamilyContactManager {
         assertNull(retrievedPerson);
     }
 
+    /**
+     * Comprehensive test case to verify the functionality of retrieving an event by name from the contact manager.
+     * This test ensures that the `getEventByName()` method correctly retrieves event details and handles various scenarios.
+     */
     @Test
     public void testGetEventByName() {
-        // Adding an event to the contact manager
-        Event event1 = new Event("Birthday", "2023-01-01", "Party");
+        // Arrange: Adding multiple events to the contact manager
+        Event event1 = new Event("Birthday", "2023-01-01", "Party with friends");
+        Event event2 = new Event("Graduation", "2023-06-30", "College graduation ceremony");
+        Event event3 = new Event("Anniversary", "2023-04-15", "Celebrate a year of togetherness");
         contactManager.addEvent(event1);
+        contactManager.addEvent(event2);
+        contactManager.addEvent(event3);
 
-        // Retrieving the event by name
-        Event retrievedEvent = contactManager.getEventByName("Birthday");
-        assertNotNull(retrievedEvent);
-        assertEquals("Birthday", retrievedEvent.getEventName());
-        assertEquals("2023-01-01", retrievedEvent.getEventDate());
-        assertEquals("Party", retrievedEvent.getDescription());
+        // Act 1: Retrieving an existing event by name
+        Event retrievedEvent1 = contactManager.getEventByName("Birthday");
+        assertNotNull(retrievedEvent1);
+        assertEquals("Birthday", retrievedEvent1.getEventName());
+        assertEquals("2023-01-01", retrievedEvent1.getEventDate());
+        assertEquals("Party with friends", retrievedEvent1.getDescription());
+
+        // Act 2: Retrieving another existing event by name
+        Event retrievedEvent2 = contactManager.getEventByName("Anniversary");
+        assertNotNull(retrievedEvent2);
+        assertEquals("Anniversary", retrievedEvent2.getEventName());
+        assertEquals("2023-04-15", retrievedEvent2.getEventDate());
+        assertEquals("Celebrate a year of togetherness", retrievedEvent2.getDescription());
+
+        // Act 3: Retrieving a non-existent event by name
+        Event nonExistentEvent = contactManager.getEventByName("Vacation");
+        assertNull(nonExistentEvent);
     }
+
 
     @Test
     public void testGetEventByNameNotFound() {
