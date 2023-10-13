@@ -58,4 +58,14 @@ public class TestPerson {
         Person sameObject = person;
         assertTrue(person.equals(sameObject));
     }
+
+    @Test
+    public void testNewConstructor() {
+        Person personWithRelation = new Person("Alice", "Sister", "02/20/1985");
+        assertEquals("Alice", personWithRelation.getName());
+        assertEquals("Sister", personWithRelation.getRelationship());
+        assertEquals("02/20/1985", personWithRelation.getBirthday());
+        assertNull(personWithRelation.getEmail()); // The email and phone number should be null
+        assertNull(personWithRelation.getPhoneNumber());
+    }
 }

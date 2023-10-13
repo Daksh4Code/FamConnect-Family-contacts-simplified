@@ -144,4 +144,47 @@ public class TestFamilyContactManager {
         assertNotNull(resultNotFound);
         assertEquals("Not Found", resultNotFound.getEventName());
     }
+
+    @Test
+    public void testDeletePersonNull() {
+        // Test deleting a person when the person exists
+        Person person = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
+        contactManager.addPerson(person);
+        contactManager.deletePerson("John");
+        assertEquals(0, contactManager.getAllContacts().size());
+
+        // Test deleting a person when the person is null
+        contactManager.deletePerson(null); // Should not throw an exception
+        assertEquals(0, contactManager.getAllContacts().size());
+    }
+
+    @Test
+    public void testDeleteEventNull() {
+        // Test deleting an event when the event exists
+        Event event = new Event("Graduation", "05/20/2023", "John's college graduation");
+        contactManager.addEvent(event);
+        contactManager.deleteEvent("Graduation");
+        assertEquals(0, contactManager.getAllEvents().size());
+
+        // Test deleting an event when the event is null
+        contactManager.deleteEvent(null); // Should not throw an exception
+        assertEquals(0, contactManager.getAllEvents().size());
+    }
+
+    @Test
+    public void testUpdatePersonDetailsNull() {
+        // Test updating a person's details when the person exists
+        Person person = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
+        contactManager.addPerson(person);
+
+        Person updatedPerson = new Person("John", "Brother", "01/15/1980", "new@email.com", "987-654-3210");
+        contactManager.updatePersonDetails("John", updatedPerson);
+        Person retrievedPerson = contactManager.getPersonByName("John");
+        assertEquals("new@email.com", retrievedPerson.getEmail());
+
+        // Test updating a person's details when the person is null
+        contactManager.updatePersonDetails(null, updatedPerson);
+        assertNull(updatedPerson); // Ensure that the updatedPerson remains null
+    }
+
 }
