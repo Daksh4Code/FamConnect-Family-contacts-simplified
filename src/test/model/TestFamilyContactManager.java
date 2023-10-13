@@ -20,15 +20,7 @@ public class TestFamilyContactManager {
         assertEquals(1, contactManager.getAllContacts().size());
     }
 
-    @Test
-    public void testUpdatePersonDetails() {
-        Person person = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
-        contactManager.addPerson(person);
-        Person updatedPerson = new Person("John", "Brother", "01/15/1980", "new@email.com", "987-654-3210");
-        contactManager.updatePersonDetails("John", updatedPerson);
-        Person retrievedPerson = contactManager.getAllContacts().get(0);
-        assertEquals("new@email.com", retrievedPerson.getEmail());
-    }
+
 
     @Test
     public void testDeletePerson() {
@@ -46,14 +38,39 @@ public class TestFamilyContactManager {
     }
 
     @Test
+    public void testUpdatePersonDetails() {
+        // Create a person
+        Person person = new Person("John", "Brother", "01/15/1980", "john@email.com", "123-456-7890");
+        contactManager.addPerson(person);
+
+        // Update email address
+        Person updatedPerson = new Person("John", "Brother", "01/15/1980", "new@email.com", "987-654-3210");
+        contactManager.updatePersonDetails("John", updatedPerson);
+        Person retrievedPerson = contactManager.getPersonByName("John");
+        assertEquals("new@email.com", retrievedPerson.getEmail());
+
+        // Test updating non-existent person
+        Person nonExistentPerson = new Person("Alice", "Sister", "02/20/1985", "alice@email.com", "987-654-3210");
+        assertThrows(IllegalArgumentException.class, () -> contactManager.updatePersonDetails("Alice", nonExistentPerson));
+    }
+
+    @Test
     public void testUpdateEvent() {
+        // Create an event
         Event event = new Event("Graduation", "05/20/2023", "John's college graduation");
         contactManager.addEvent(event);
+
+        // Update description
         Event updatedEvent = new Event("Graduation", "05/20/2023", "Updated description");
         contactManager.updateEvent("Graduation", updatedEvent);
-        Event retrievedEvent = contactManager.getAllEvents().get(0);
+        Event retrievedEvent = contactManager.getEventByName("Graduation");
         assertEquals("Updated description", retrievedEvent.getDescription());
+
+        // Test updating non-existent event
+        Event nonExistentEvent = new Event("Birthday Party", "03/10/2023", "Alice's birthday celebration");
+        assertThrows(IllegalArgumentException.class, () -> contactManager.updateEvent("Birthday Party", nonExistentEvent));
     }
+
 
     @Test
     public void testDeleteEvent() {

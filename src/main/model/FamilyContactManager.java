@@ -17,14 +17,27 @@ public class FamilyContactManager {
     }
 
     public void updatePersonDetails(String name, Person updatedPerson) {
-        for (int i = 0; i < familyContacts.size(); i++) {
-            Person existingPerson = familyContacts.get(i);
-            if (existingPerson.getName().equals(name)) {
-                familyContacts.set(i, updatedPerson);
-                break;
+        // Find the person with the given name, if it exists
+        Person personToUpdate = null;
+        for (Person person : familyContacts) {
+            if (person.getName().equals(name)) {
+                personToUpdate = person;
+                break; // Exit the loop after finding the person
             }
         }
+
+        // Check if the person exists in the list
+        if (personToUpdate != null) {
+            // Update the person's details
+            personToUpdate.setName(updatedPerson.getName());
+            personToUpdate.setRelationship(updatedPerson.getRelationship());
+            personToUpdate.setBirthday(updatedPerson.getBirthday());
+            personToUpdate.setEmail(updatedPerson.getEmail());
+            personToUpdate.setPhoneNumber(updatedPerson.getPhoneNumber());
+        }
+        // If the person with the given name doesn't exist, do nothing (no exception is thrown)
     }
+
 
     public void deletePerson(String name) {
         familyContacts.removeIf(person -> person.getName().equals(name));
@@ -55,5 +68,27 @@ public class FamilyContactManager {
     public List<Event> getAllEvents() {
         return new ArrayList<>(customEvents);
     }
+
+    public Person getPersonByName(String name) {
+        for (Person person : familyContacts) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null; // Return null if the person with the given name is not found
+    }
+
+    public Event getEventByName(String name) {
+        for (Event event : customEvents) {
+            if (event.getEventName().equals(name)) {
+                return event;
+            }
+        }
+        return null; // Return null if the event with the given name is not found
+    }
+
+
+
+
 
 }
