@@ -44,21 +44,4 @@ public class TestEvent {
         assertFalse(event.equals(sameEvent));
         assertFalse(event.equals(differentEvent));
     }
-/*
-    @Test
-    public void testNullEquality() {
-        assertFalse(event.equals(null));
-    }
-
-    @Test
-    public void testDifferentObjectEquality() {
-        assertFalse(event.equals(new Object()));
-    }
-
-    @Test
-    public void testSameObjectEquality() {
-        Event sameObject = event;
-        assertTrue(event.equals(sameObject));
-    }
- */
 }

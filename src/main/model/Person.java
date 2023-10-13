@@ -97,7 +97,7 @@ public class Person {
     // EFFECTS: Retrieves and returns a custom event by its specified event name from the person's
     // list of custom events
     public Event getCustomEventByName(String eventName) {
-        for (Event event : customEvents) {
+        for (Event event : this.customEvents) {
             if (event.getEventName().equals(eventName)) {
                 return event;
             }
@@ -111,14 +111,14 @@ public class Person {
     // relationship, birthday, email, phone number, and a list of custom events - if any.
     @Override
     public String toString() {
-        String result = "Person{name='" + this.name  + "', relationship='"
-                + this.relationship + "', birthday='" + this.birthday
-                + "', email='" + this.email + "', phoneNumber='" + this.phoneNumber;
+        String result = "Person{Name='" + this.name  + "', Relationship='"
+                + this.relationship + "', Birthday='" + this.birthday
+                + "', Email='" + this.email + "', Phone Number='" + this.phoneNumber;
 
-        if (!customEvents.isEmpty()) {
-            result += ", customEvents=[";
+        if (!this.customEvents.isEmpty()) {
+            result += ", Custom Events=[";
             boolean bool = true;
-            for (Event event : customEvents) {
+            for (Event event : this.customEvents) {
                 if (!bool) {
                     result += ", ";
                 }

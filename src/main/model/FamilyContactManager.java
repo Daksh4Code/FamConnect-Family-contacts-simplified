@@ -34,7 +34,7 @@ public class FamilyContactManager {
     // MODIFIES: None
     // EFFECTS: Returns a list of family contacts
     public List<Person> getAllContacts() {
-        return familyContacts;
+        return this.familyContacts;
     }
 
     // REQUIRES: None
@@ -44,7 +44,7 @@ public class FamilyContactManager {
     public void deletePerson(String name) {
         Person person = getPersonByName(name);
         if (person != null) {
-            familyContacts.remove(person);
+            this.familyContacts.remove(person);
         }
     }
 
@@ -53,7 +53,7 @@ public class FamilyContactManager {
     // EFFECTS: Retrieves and returns the Person object with the specified name from
     // the list of family contacts
     public Person getPersonByName(String name) {
-        for (Person person : familyContacts) {
+        for (Person person : this.familyContacts) {
             if (person.getName().equals(name)) {
                 return person;
             }
@@ -80,7 +80,7 @@ public class FamilyContactManager {
     // if event is null
     public void addEvent(Event event) {
         if (event != null) {
-            events.add(event);
+            this.events.add(event);
         }
     }
 
@@ -88,7 +88,7 @@ public class FamilyContactManager {
     // MODIFIES: None
     // EFFECTS: Returns a list of events
     public List<Event> getAllEvents() {
-        return events;
+        return this.events;
     }
 
     // REQUIRES: None
@@ -98,7 +98,7 @@ public class FamilyContactManager {
     public void deleteEvent(String eventName) {
         Event event = getEventByName(eventName);
         if (event != null) {
-            events.remove(event);
+            this.events.remove(event);
         }
     }
 
@@ -107,7 +107,7 @@ public class FamilyContactManager {
     // EFFECTS: Retrieves and returns the Event object with the specified event name from
     // the list of events
     public Event getEventByName(String eventName) {
-        for (Event event : events) {
+        for (Event event : this.events) {
             if (event.getEventName().equals(eventName)) {
                 return event;
             }
