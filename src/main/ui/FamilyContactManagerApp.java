@@ -34,7 +34,6 @@ public class FamilyContactManagerApp {
         System.out.println("Your personal family contact manager awaits you.");
         boolean isRunning = true;
         while (isRunning) {
-
             displayMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
