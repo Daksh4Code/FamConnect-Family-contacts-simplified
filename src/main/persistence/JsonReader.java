@@ -14,7 +14,7 @@ import org.json.*;
 
 // Represents a reader that reads workroom from JSON data stored in file
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -72,7 +72,7 @@ public class JsonReader {
 
     // MODIFIES: wr
     // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addEvents(FamilyContactManager manager, JSONArray events) {
+    public void addEvents(FamilyContactManager manager, JSONArray events) {
         for (Object obj : events) {
             JSONObject eventJson = (JSONObject) obj;
             String eventName = eventJson.getString("eventName");
