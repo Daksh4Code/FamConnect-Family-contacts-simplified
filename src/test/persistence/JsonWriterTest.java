@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class JsonWriterTest extends JsonTest {
     private static final String TEST_FILE = "./data/testContacts.json";
 
-
     @Test
     void testWriterInvalidFile() {
         try {
@@ -38,48 +37,42 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader jsonReader = new JsonReader(TEST_FILE);
             manager = jsonReader.read();
-            // You can add more specific checks here based on your JSON file's content
             assertEquals(0, manager.getAllContacts().size());
             assertEquals(0, manager.getAllEvents().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
+
     @Test
     void testWriterGeneralFamilyContactManager() {
         try {
-            // Create a FamilyContactManager with test data
             FamilyContactManager manager = new FamilyContactManager();
-            Person person = new Person("John", "Family", "1990-01-15", "john@example.com", "123-456-7890");
-            person.addCustomEvent(new Event("Birthday", "1990-01-15", "John's birthday"));
+            Person person = new Person("John", "Family", "1986-10-12", "john@example.com", "1234567898");
+            person.addCustomEvent(new Event("Birthday", "2009-02-25", "John's birthday"));
             manager.addPerson(person);
-
-            // Write the manager to a file
             JsonWriter jsonWriter = new JsonWriter(TEST_FILE);
             jsonWriter.open();
             jsonWriter.write(manager);
             jsonWriter.close();
 
-            // Read the manager from the file
             JsonReader jsonReader = new JsonReader(TEST_FILE);
             FamilyContactManager readManager = jsonReader.read();
-
-            // Assert that the read data matches the original data
             List<Person> people = readManager.getAllContacts();
-            assertEquals(1, people.size()); // Adjust this value based on your test data
+            assertEquals(1, people.size());
             Person readPerson = people.get(0);
             assertEquals("John", readPerson.getName());
             assertEquals("Family", readPerson.getRelationship());
-            assertEquals("1990-01-15", readPerson.getBirthday());
+            assertEquals("1986-10-12", readPerson.getBirthdate());
             assertEquals("john@example.com", readPerson.getEmail());
-            assertEquals("123-456-7890", readPerson.getPhoneNumber());
-
+            assertEquals("1234567898", readPerson.getPhoneNumber());
             List<Event> events = readPerson.getCustomEvents();
-            assertEquals(1, events.size()); // Adjust this value based on your test data
+            assertEquals(1, events.size());
             Event readEvent = events.get(0);
             assertEquals("Birthday", readEvent.getEventName());
-            assertEquals("1990-01-15", readEvent.getEventDate());
+            assertEquals("2009-02-25", readEvent.getEventDate());
             assertEquals("John's birthday", readEvent.getEventDescription());
+
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

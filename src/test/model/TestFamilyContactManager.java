@@ -2,12 +2,9 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestFamilyContactManager {
@@ -214,7 +211,7 @@ public class TestFamilyContactManager {
         assertNotNull(gotPerson);
         assertEquals("Alice", gotPerson.getName());
         assertEquals("Sister", gotPerson.getRelationship());
-        assertEquals("03/04/2005", gotPerson.getBirthday());
+        assertEquals("03/04/2005", gotPerson.getBirthdate());
         assertEquals("alice@email.com", gotPerson.getEmail());
         assertEquals("123-456-7890", gotPerson.getPhoneNumber());
     }

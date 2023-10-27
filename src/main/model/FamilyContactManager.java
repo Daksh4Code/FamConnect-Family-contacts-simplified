@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import persistence.Writable;
 
 // The 'FamilyContactManager' class manages family contacts (people) and events in a contact
@@ -64,7 +65,7 @@ public class FamilyContactManager implements Writable {
         Person person = getPersonByName(name);
         if (person != null) {
             person.setRelationship(updatedPerson.getRelationship());
-            person.setBirthday(updatedPerson.getBirthday());
+            person.setBirthdate(updatedPerson.getBirthdate());
         }
     }
 
@@ -137,11 +138,5 @@ public class FamilyContactManager implements Writable {
             jsonArray.put(person.toJson());
         }
         return jsonArray;
-    }
-
-    // Setter method(s)
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 }

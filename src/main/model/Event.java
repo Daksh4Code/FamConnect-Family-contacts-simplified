@@ -1,6 +1,7 @@
 package model;
 
 import org.json.JSONObject;
+
 import persistence.Writable;
 
 // The 'Event' class represents a specific event associated with a person object in the family contact
@@ -17,6 +18,7 @@ public class Event implements Writable {
     private String eventDate;
     private String eventDescription;
 
+    // REQUIRES: eventDate must be in appropriate date format of data String Type
     // MODIFIES: this
     // EFFECTS: Constructs an Event object with given event name, event date and event
     // description (all in String format)

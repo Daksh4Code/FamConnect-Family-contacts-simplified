@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class TestPerson {
     public void testGetters() {
         assertEquals("John", person.getName());
         assertEquals("Brother", person.getRelationship());
-        assertEquals("01/15/1980", person.getBirthday());
+        assertEquals("01/15/1980", person.getBirthdate());
         assertEquals("john@email.com", person.getEmail());
         assertEquals("123-456-7890", person.getPhoneNumber());
     }
@@ -27,12 +28,12 @@ public class TestPerson {
     public void testSetters() {
         person.setName("Alice");
         person.setRelationship("Sister");
-        person.setBirthday("02/30/1985");
+        person.setBirthdate("02/30/1985");
         person.setEmail("alice@email.com");
         person.setPhoneNumber("987-654-3210");
         assertEquals("Alice", person.getName());
         assertEquals("Sister", person.getRelationship());
-        assertEquals("02/30/1985", person.getBirthday());
+        assertEquals("02/30/1985", person.getBirthdate());
         assertEquals("alice@email.com", person.getEmail());
         assertEquals("987-654-3210", person.getPhoneNumber());
     }
@@ -42,7 +43,7 @@ public class TestPerson {
         Person newPerson = new Person("Alice", "Sister", "12/22/1985");
         assertEquals("Alice", newPerson.getName());
         assertEquals("Sister", newPerson.getRelationship());
-        assertEquals("12/22/1985", newPerson.getBirthday());
+        assertEquals("12/22/1985", newPerson.getBirthdate());
         assertNull(newPerson.getEmail());
         assertNull(newPerson.getPhoneNumber());
     }

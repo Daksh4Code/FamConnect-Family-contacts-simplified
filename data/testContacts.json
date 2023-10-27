@@ -1,0 +1,12 @@
+{"familyContacts": [{
+    "birthday": "1986-10-12",
+    "phoneNumber": "1234567898",
+    "customEvents": [{
+        "eventDescription": "John's birthday",
+        "eventName": "Birthday",
+        "eventDate": "2009-02-25"
+    }],
+    "name": "John",
+    "relationship": "Family",
+    "email": "john@example.com"
+}]}

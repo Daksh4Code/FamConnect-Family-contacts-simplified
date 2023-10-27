@@ -1,12 +1,10 @@
 package persistence;
 
-import model.Event;
 import model.FamilyContactManager;
-import org.json.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,10 +27,10 @@ class JsonReaderTest extends JsonTest {
         JsonReader jsonReader = new JsonReader(TEST_FILE);
         try {
             FamilyContactManager manager = jsonReader.read();
-            assertEquals(1, manager.getAllContacts().size());
+            assertEquals(2, manager.getAllContacts().size());
             assertEquals(0, manager.getAllEvents().size());
         } catch (IOException e) {
-            fail("Couldn't read from file");
+            fail("Error! Couldn't read from file");
         }
     }
 
@@ -41,13 +39,10 @@ class JsonReaderTest extends JsonTest {
         JsonReader jsonReader = new JsonReader(TEST_FILE);
         try {
             FamilyContactManager manager = jsonReader.read();
-            assertEquals(1, manager.getAllContacts().size());
+            assertEquals(2, manager.getAllContacts().size());
             assertEquals(0, manager.getAllEvents().size());
         } catch (IOException e) {
-            fail("Couldn't read from file");
+            fail("Error! Couldn't read from file");
         }
     }
-
-
-
 }

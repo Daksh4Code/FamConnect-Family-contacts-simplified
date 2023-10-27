@@ -5,9 +5,12 @@ import model.FamilyContactManager;
 import model.Person;
 
 import java.io.IOException;
+
 import java.nio.charset.StandardCharsets;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -46,7 +49,8 @@ public class JsonReader {
     }
 
     // MODIFIES: manager
-    // EFFECTS: parses person objecs from JSON object and adds its details to FamilyContactManager
+    // EFFECTS: parses person object from JSON object and adds it and subsequent details
+    // to FamilyContactManager (JSON format)
     private void addPeople(FamilyContactManager manager, JSONArray people) {
         for (Object obj : people) {
             JSONObject personJson = (JSONObject) obj;
@@ -68,6 +72,4 @@ public class JsonReader {
             manager.addPerson(person);
         }
     }
-
-
 }

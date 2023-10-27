@@ -1,12 +1,22 @@
-{"familyContacts": [{
-    "birthday": "t",
-    "phoneNumber": "t",
-    "customEvents": [{
-        "eventDescription": "g",
-        "eventName": "g",
-        "eventDate": "g"
-    }],
-    "name": "t",
-    "relationship": "t",
-    "email": "t"
-}]}
+{"familyContacts": [
+    {
+        "birthday": "t",
+        "phoneNumber": "t",
+        "customEvents": [{
+            "eventDescription": "g",
+            "eventName": "g",
+            "eventDate": "g"
+        }],
+        "name": "t",
+        "relationship": "t",
+        "email": "t"
+    },
+    {
+        "birthday": "hh",
+        "phoneNumber": "h",
+        "customEvents": [],
+        "name": "h",
+        "relationship": "h",
+        "email": "h"
+    }
+]}

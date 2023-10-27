@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import persistence.Writable;
 
 // The 'Person' class represents an individual person in the family contact management system.
@@ -12,34 +13,38 @@ import persistence.Writable;
 // email, phone number, and any custom events associated with them which the user chooses to add.
 // Custom events are unique to a person, and can include anything from anniversaries to graduation
 // ceremonies.
-// This class provides methods to set and retrieve the person's attributes
+// This class provides methods to set and retrieve the person's attributes.
+// It also implements the Writable interface and contains a toJson() method which returns the
+// Person object and associated details in JSON format.
 public class Person implements Writable {
     private String name;
     private String relationship;
-    private String birthday;
+    private String birthdate;
     private String email;
     private String phoneNumber;
     private List<Event> customEvents;
 
+    // REQUIRES: phoneNumber and birthdate should be in appropriate format of data String type
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation, birthday,
     // email and phone number (all in String format to maintain uniformity and ease of maintenance)
-    public Person(String name, String relation, String birthday, String email, String phoneNumber) {
+    public Person(String name, String relation, String birthdate, String email, String phoneNumber) {
         this.name = name;
         this.relationship = relation;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.customEvents = new ArrayList<>();
     }
 
+    // REQUIRES: birthdate should be in appropriate format of data String type
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation and birthday
     // (all in String format)
-    public Person(String name, String relation, String birthday) {
+    public Person(String name, String relation, String birthdate) {
         this.name = name;
         this.relationship = relation;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
     }
 
     // Getter methods
@@ -52,8 +57,8 @@ public class Person implements Writable {
         return this.relationship;
     }
 
-    public String getBirthday() {
-        return this.birthday;
+    public String getBirthdate() {
+        return this.birthdate;
     }
 
     public String getEmail() {
@@ -78,8 +83,8 @@ public class Person implements Writable {
         this.relationship = relationship;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     public void setEmail(String email) {
@@ -115,7 +120,7 @@ public class Person implements Writable {
     @Override
     public String toString() {
         String result = "Person{Name='" + this.name  + "', Relationship='"
-                + this.relationship + "', Birthday='" + this.birthday
+                + this.relationship + "', Birthday='" + this.birthdate
                 + "', Email='" + this.email + "', Phone Number='" + this.phoneNumber;
         if (!this.customEvents.isEmpty()) {
             result += ", Custom Events=[";
@@ -140,7 +145,7 @@ public class Person implements Writable {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
         jsonObject.put("relationship", relationship);
-        jsonObject.put("birthday", birthday);
+        jsonObject.put("birthday", birthdate);
         jsonObject.put("email", email);
         jsonObject.put("phoneNumber", phoneNumber);
         JSONArray customEventsArray = new JSONArray();
