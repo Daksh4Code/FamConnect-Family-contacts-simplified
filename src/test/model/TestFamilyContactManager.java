@@ -221,6 +221,7 @@ public class TestFamilyContactManager {
 
     @Test
     void testEventsToJsonArray() {
+
         // Create a list of events
         List<Event> events = new ArrayList<>();
         events.add(new Event("Event 1", "2023-01-01", "Description 1"));
