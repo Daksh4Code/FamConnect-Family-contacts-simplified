@@ -21,7 +21,6 @@ public class Person implements Writable {
     private String phoneNumber;
     private List<Event> customEvents;
 
-    // REQUIRES: None
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation, birthday,
     // email and phone number (all in String format to maintain uniformity and ease of maintenance)
@@ -34,7 +33,6 @@ public class Person implements Writable {
         this.customEvents = new ArrayList<>();
     }
 
-    // REQUIRES: None
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation and birthday
     // (all in String format)
@@ -44,49 +42,52 @@ public class Person implements Writable {
         this.birthday = birthday;
     }
 
+    // Getter methods
+
     public String getName() {
         return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRelationship() {
         return this.relationship;
     }
 
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-
     public String getBirthday() {
-
         return this.birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public List<Event> getCustomEvents() {
         return this.customEvents;
+    }
+
+    // Setter methods
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     // REQUIRES: 'event' should not be null
@@ -97,7 +98,6 @@ public class Person implements Writable {
     }
 
     // REQUIRES: 'eventName' should not be null
-    // MODIFIES: None
     // EFFECTS: Retrieves and returns a custom event by its specified event name from the person's
     // list of custom events
     public Event getCustomEventByName(String eventName) {
@@ -109,8 +109,6 @@ public class Person implements Writable {
         return null;
     }
 
-    // REQUIRES: None
-    // MODIFIES: None
     // EFFECTS: Retrieves and returns a well formatted string representation of the person,
     // including their name, relationship, birthday, email, phone number, and a list of
     // custom events - if any are associated with the person.
@@ -135,6 +133,9 @@ public class Person implements Writable {
         return result;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Returns a string representation of the person object and associated details
+    // in JSON format
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
@@ -142,8 +143,6 @@ public class Person implements Writable {
         jsonObject.put("birthday", birthday);
         jsonObject.put("email", email);
         jsonObject.put("phoneNumber", phoneNumber);
-
-        // Convert the custom events to a JSON array
         JSONArray customEventsArray = new JSONArray();
         for (Event event : customEvents) {
             customEventsArray.put(event.toJson());

@@ -1,11 +1,12 @@
-{
-    "familyContacts": [{
-        "birthday": "2005-08-13",
-        "phoneNumber": "1234567898",
-        "customEvents": [],
-        "name": "p",
-        "relationship": "Mark Chapman",
-        "email": "mark.chapman@example.com"
+{"familyContacts": [{
+    "birthday": "t",
+    "phoneNumber": "t",
+    "customEvents": [{
+        "eventDescription": "g",
+        "eventName": "g",
+        "eventDate": "g"
     }],
-    "events": []
-}
+    "name": "t",
+    "relationship": "t",
+    "email": "t"
+}]}

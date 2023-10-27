@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads FamilyContactManager from JSON data stored in file
 public class JsonReader {
     private final String source;
 
@@ -21,10 +21,10 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads FamilyContactManager from file and returns it;
     // throws IOException if an error occurs reading data from file
     public FamilyContactManager read() throws IOException {
-        String jsonData = readFile(source);
+        String jsonData = readFile(this.source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseFamilyContactManager(jsonObject);
     }
@@ -38,16 +38,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses FamilyContactManager from JSON object and returns it
     private FamilyContactManager parseFamilyContactManager(JSONObject jsonObject) {
         FamilyContactManager manager = new FamilyContactManager();
         addPeople(manager, jsonObject.getJSONArray("familyContacts"));
-        addEvents(manager, jsonObject.getJSONArray("events"));
         return manager;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: manager
+    // EFFECTS: parses person objecs from JSON object and adds its details to FamilyContactManager
     private void addPeople(FamilyContactManager manager, JSONArray people) {
         for (Object obj : people) {
             JSONObject personJson = (JSONObject) obj;
@@ -67,19 +66,6 @@ public class JsonReader {
                 person.addCustomEvent(customEvent);
             }
             manager.addPerson(person);
-        }
-    }
-
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
-    public void addEvents(FamilyContactManager manager, JSONArray events) {
-        for (Object obj : events) {
-            JSONObject eventJson = (JSONObject) obj;
-            String eventName = eventJson.getString("eventName");
-            String eventDate = eventJson.getString("eventDate");
-            String eventDescription = eventJson.getString("eventDescription");
-            Event event = new Event(eventName, eventDate, eventDescription);
-            manager.addEvent(event);
         }
     }
 
