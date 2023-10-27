@@ -132,7 +132,7 @@ public class FamilyContactManager implements Writable {
 
     // MODIFIES: this
     // EFFECTS: Returns an array of JSON type representing the list of family contacts
-    private JSONArray familyContactsToJsonArray() {
+    public JSONArray familyContactsToJsonArray() {
         JSONArray jsonArray = new JSONArray();
         for (Person person : this.familyContacts) {
             jsonArray.put(person.toJson());
@@ -142,11 +142,15 @@ public class FamilyContactManager implements Writable {
 
     // MODIFIES: this
     // EFFECTS: Returns an array of JSON type representing the list of events
-    private JSONArray eventsToJsonArray() {
+    public JSONArray eventsToJsonArray() {
         JSONArray jsonArray = new JSONArray();
         for (Event event : this.events) {
             jsonArray.put(event.toJson());
         }
         return jsonArray;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
