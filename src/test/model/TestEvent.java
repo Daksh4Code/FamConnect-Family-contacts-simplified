@@ -16,17 +16,17 @@ public class TestEvent {
     public void testGetters() {
         assertEquals("Graduation", event.getEventName());
         assertEquals("08/10/2026", event.getEventDate());
-        assertEquals("Lily's college graduation", event.getDescription());
+        assertEquals("Lily's college graduation", event.getEventDescription());
     }
 
     @Test
     public void testSetters() {
         event.setEventName("Birthday party");
         event.setEventDate("02/20/2023");
-        event.setDescription("Grace's birthday party");
+        event.setEventDescription("Grace's birthday party");
         assertEquals("Birthday party", event.getEventName());
         assertEquals("02/20/2023", event.getEventDate());
-        assertEquals("Grace's birthday party", event.getDescription());
+        assertEquals("Grace's birthday party", event.getEventDescription());
     }
 
     @Test

@@ -3,13 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // The 'Person' class represents an individual person in the family contact management system.
 // It contains information about a person including their name, relationship to the user, birthday,
 // email, phone number, and any custom events associated with them which the user chooses to add.
 // Custom events are unique to a person, and can include anything from anniversaries to graduation
 // ceremonies.
 // This class provides methods to set and retrieve the person's attributes
-public class Person {
+public class Person implements Writable {
     private String name;
     private String relationship;
     private String birthday;
@@ -129,5 +133,22 @@ public class Person {
         }
         result += "}";
         return result;
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", name);
+        jsonObject.put("relationship", relationship);
+        jsonObject.put("birthday", birthday);
+        jsonObject.put("email", email);
+        jsonObject.put("phoneNumber", phoneNumber);
+
+        // Convert the custom events to a JSON array
+        JSONArray customEventsArray = new JSONArray();
+        for (Event event : customEvents) {
+            customEventsArray.put(event.toJson());
+        }
+        jsonObject.put("customEvents", customEventsArray);
+        return jsonObject;
     }
 }

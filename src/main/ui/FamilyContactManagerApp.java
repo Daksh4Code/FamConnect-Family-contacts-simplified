@@ -4,8 +4,14 @@ import model.Event;
 import model.FamilyContactManager;
 import model.Person;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import java.util.List;
 import java.util.Scanner;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 // The 'FamilyContactManagerApp' class represents an application for managing family contacts and
 // the custom events associated with them.
@@ -14,6 +20,8 @@ import java.util.Scanner;
 public class FamilyContactManagerApp {
     private FamilyContactManager contactManager;
     private Scanner scanner;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // REQUIRES: None
     // MODIFIES: this
@@ -22,6 +30,8 @@ public class FamilyContactManagerApp {
     public FamilyContactManagerApp() {
         contactManager = new FamilyContactManager();
         scanner = new Scanner(System.in);
+        jsonWriter = new JsonWriter("./data/contacts.json"); // Adjust the path as needed
+        jsonReader = new JsonReader("./data/contacts.json"); // Adjust the path as needed
     }
 
     // REQUIRES: None
@@ -29,10 +39,11 @@ public class FamilyContactManagerApp {
     // EFFECTS: Starts the Family Contact Manager application and displays a menu which
     // processes and performs functions based on user input until the user chooses to exit
     // An error message is displayed for any option entered which is not in the menu
+    @SuppressWarnings("methodlength")
     public void start() {
+        boolean isRunning = true;
         System.out.println("Welcome to FamConnect Version 1! ");
         System.out.println("Your personal family contact manager awaits you.");
-        boolean isRunning = true;
         while (isRunning) {
             displayMenu();
             int choice = scanner.nextInt();
@@ -46,6 +57,10 @@ public class FamilyContactManagerApp {
             } else if (choice == 4) {
                 updateContactDetails();
             } else if (choice == 5) {
+                loadContacts();
+            } else if (choice == 6) {
+                saveAndExit();
+            } else if (choice == 7) {
                 isRunning = false;
             } else {
                 System.out.println("Invalid choice! Please try again.");
@@ -63,7 +78,9 @@ public class FamilyContactManagerApp {
         System.out.println("2. View all contacts");
         System.out.println("3. Delete contact");
         System.out.println("4. Update contact details");
-        System.out.println("5. Exit");
+        System.out.println("5. Load database from file");
+        System.out.println("6. Save database to file");
+        System.out.println("7. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -174,7 +191,7 @@ public class FamilyContactManagerApp {
                         System.out.print("Enter updated event description: ");
                         String eventDescription = this.scanner.nextLine();
                         existingEvent.setEventDate(eventDate);
-                        existingEvent.setDescription(eventDescription);
+                        existingEvent.setEventDescription(eventDescription);
                         System.out.println("Custom event updated successfully.");
                     } else {
                         System.out.println("Event not found for this person.");
@@ -193,6 +210,31 @@ public class FamilyContactManagerApp {
         } else {
             System.out.println("Contact not found.");
         }
+    }
+
+    private void saveContacts() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(contactManager);
+            jsonWriter.close();
+            System.out.println("Data saved successfully.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error saving data to file: " + e.getMessage());
+        }
+    }
+
+    private void loadContacts() {
+        try {
+            contactManager = jsonReader.read();
+            System.out.println("Data loaded successfully.");
+        } catch (IOException e) {
+            System.out.println("Error loading data from file: " + e.getMessage());
+        }
+    }
+
+    private void saveAndExit() {
+        saveContacts();
+        System.out.println("Goodbye!");
     }
 
 }

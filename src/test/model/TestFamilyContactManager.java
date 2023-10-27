@@ -58,7 +58,7 @@ public class TestFamilyContactManager {
         Event updatedEvent = new Event("Graduation", "05/20/2023", "Updated description of graduation");
         contactManager.updateEvent("Graduation", updatedEvent);
         Event retrievedEvent = contactManager.getEventByName("Graduation");
-        assertEquals("Updated description of graduation", retrievedEvent.getDescription());
+        assertEquals("Updated description of graduation", retrievedEvent.getEventDescription());
     }
 
     @Test
@@ -161,7 +161,7 @@ public class TestFamilyContactManager {
         Event updatedEvent = new Event("Birthday party", "03/10/2023", "Updated description of party");
         contactManager.updateEvent("Birthday party", updatedEvent);
         Event gotEvent = contactManager.getEventByName("Birthday party");
-        assertEquals("Updated description of party", gotEvent.getDescription());
+        assertEquals("Updated description of party", gotEvent.getEventDescription());
     }
 
     @Test
@@ -182,12 +182,12 @@ public class TestFamilyContactManager {
         assertNotNull(gotEvent1);
         assertEquals("Birthday", gotEvent1.getEventName());
         assertEquals("2023-01-01", gotEvent1.getEventDate());
-        assertEquals("party time", gotEvent1.getDescription());
+        assertEquals("party time", gotEvent1.getEventDescription());
         Event gotEvent2 = contactManager.getEventByName("Anniversary");
         assertNotNull(gotEvent2);
         assertEquals("Anniversary", gotEvent2.getEventName());
         assertEquals("2023-04-15", gotEvent2.getEventDate());
-        assertEquals("Anniversary celebration", gotEvent2.getDescription());
+        assertEquals("Anniversary celebration", gotEvent2.getEventDescription());
     }
 
     @Test
