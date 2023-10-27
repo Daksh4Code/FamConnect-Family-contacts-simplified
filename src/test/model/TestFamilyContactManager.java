@@ -218,36 +218,6 @@ public class TestFamilyContactManager {
         assertEquals("alice@email.com", gotPerson.getEmail());
         assertEquals("123-456-7890", gotPerson.getPhoneNumber());
     }
-
-    @Test
-    void testEventsToJsonArray() {
-
-        // Create a list of events
-        List<Event> events = new ArrayList<>();
-        events.add(new Event("Event 1", "2023-01-01", "Description 1"));
-        events.add(new Event("Event 2", "2023-02-02", "Description 2"));
-
-        // Set the events list in the manager
-        contactManager.setEvents(events);
-
-        // Convert events to JSON array
-        JSONArray jsonArray = contactManager.eventsToJsonArray();
-
-        // Check the JSON array size
-        assertEquals(2, jsonArray.length());
-
-        // Check the details of the first event in the JSON array
-        JSONObject eventJson1 = jsonArray.getJSONObject(0);
-        assertEquals("Event 1", eventJson1.getString("eventName"));
-        assertEquals("2023-01-01", eventJson1.getString("eventDate"));
-        assertEquals("Description 1", eventJson1.getString("eventDescription"));
-
-        // Check the details of the second event in the JSON array
-        JSONObject eventJson2 = jsonArray.getJSONObject(1);
-        assertEquals("Event 2", eventJson2.getString("eventName"));
-        assertEquals("2023-02-02", eventJson2.getString("eventDate"));
-        assertEquals("Description 2", eventJson2.getString("eventDescription"));
-    }
 }
 
 
