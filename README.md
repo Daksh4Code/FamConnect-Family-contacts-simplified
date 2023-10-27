@@ -113,13 +113,11 @@ whose birthdays are coming up next.
   email addresses, for any individual in my
   database. **(CUSTOM)**
 ## In phase 2:
-- As a user, when the 'quit' option is selected from
-the application's main menu, I want to be given the 
-option of saving the contacts and their added details 
-so far to a file. I also want to be given the option
-of not saving, if I wish to do so.
+- As a user, when the application's main menu is 
+displayed, I want to be given the option of saving 
+the contacts and their added details so far to 
+a file.
 - As a user, when I start the application, I want to 
-be given the option of reloading the contacts and 
-their details added so far from the file and resume
-from there. I also want to be given the option of 
-not reloading, if I wish to do so.
+be given the option of (re)loading the contacts and 
+their details added so far from the file, from the
+previous run, and resume from there. 
