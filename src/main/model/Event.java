@@ -4,25 +4,28 @@ import org.json.JSONObject;
 
 import persistence.Writable;
 
-// The 'Event' class represents a specific event associated with a person object in the family contact
-// management system.
-// It contains information about the event's name, date, and a brief description, all represented
-// by strings.
-// A standard event (or more) like a birthday or a custom event created by the user can be added to a
-// person's profile (the person object) to keep track of events and their dates.
+import java.time.LocalDate;
+
+// The 'Event' class represents specific events associated with a (unique) person object in the family
+// contact management system.
+// It contains information about the event's name, date, and a brief description, where the event's name
+// and description are represented by strings and the event's date is in the date format.
+// A standard event (or more) like a birthdate created by the user can be added to a person's profile
+// (the person object) to keep track of events and their dates.
 // This class provides methods to set and retrieve the event attributes.
 // It also implements the Writable interface and contains a toJson() method which returns the
 // Event object in JSON format.
 public class Event implements Writable {
     private String eventName;
-    private String eventDate;
+    private LocalDate eventDate;
     private String eventDescription;
 
-    // REQUIRES: eventDate must be in appropriate date format of data String Type
+    // REQUIRES: 'eventDate' must be in appropriate date format of LocalDate data Type, as must
+    // 'eventName' and 'eventDescription' be in String format
     // MODIFIES: this
     // EFFECTS: Constructs an Event object with given event name, event date and event
-    // description (all in String format)
-    public Event(String eventName, String eventDate, String eventDescription) {
+    // description ('eventName' and 'eventDescription' in LocalDate format, 'eventDate' in LocalDate format)
+    public Event(String eventName, LocalDate eventDate, String eventDescription) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventDescription = eventDescription;
@@ -34,7 +37,7 @@ public class Event implements Writable {
         return this.eventName;
     }
 
-    public String getEventDate() {
+    public LocalDate getEventDate() {
         return this.eventDate;
     }
 
@@ -48,7 +51,7 @@ public class Event implements Writable {
         this.eventName = eventName;
     }
 
-    public void setEventDate(String eventDate) {
+    public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -60,9 +63,9 @@ public class Event implements Writable {
     // description within a single curly bracket
     @Override
     public String toString() {
-        return ("Event{" + "Event Name='" + this.eventName
-                + '\'' + ", Event Date='" + this.eventDate + '\''
-                + ", Event Description='" + this.eventDescription + '\'' + '}');
+        return ("Event{" + "eventName = '" + this.eventName
+                + '\'' + ", eventDate = '" + this.eventDate.toString() + '\''
+                + ", eventDescription = '" + this.eventDescription + '\'' + '}');
     }
 
     // MODIFIES: this
@@ -71,7 +74,7 @@ public class Event implements Writable {
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("eventName", eventName);
-        jsonObject.put("eventDate", eventDate);
+        jsonObject.put("eventDate", eventDate.toString());
         jsonObject.put("eventDescription", eventDescription);
         return jsonObject;
     }

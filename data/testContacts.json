@@ -1,10 +1,10 @@
 {"familyContacts": [{
-    "birthday": "1986-10-12",
-    "phoneNumber": "1234567898",
-    "customEvents": [{
+    "birthday": "2004-07-10",
+    "phoneNumber": 1234567898,
+    "Associated Events": [{
         "eventDescription": "John's birthday",
         "eventName": "Birthday",
-        "eventDate": "2009-02-25"
+        "eventDate": "2004-07-10"
     }],
     "name": "John",
     "relationship": "Family",

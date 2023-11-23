@@ -5,13 +5,14 @@ import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonWriterTest extends JsonTest {
     private static final String TEST_FILE = "./data/testContacts.json";
-
+    LocalDate eventDate = LocalDate.of(2004, 7, 10);
     @Test
     void testWriterInvalidFile() {
         try {
@@ -37,19 +38,27 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader jsonReader = new JsonReader(TEST_FILE);
             manager = jsonReader.read();
+
             assertEquals(0, manager.getAllContacts().size());
-            assertEquals(0, manager.getAllEvents().size());
+
+            // Ensure the list of persons is empty before attempting to get a person
+            if (!manager.getAllContacts().isEmpty()) {
+                Person person = manager.getAllContacts().get(0);
+                assertEquals(0, person.getEvents().size());
+            }
+
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
+
     @Test
     void testWriterGeneralFamilyContactManager() {
         try {
             FamilyContactManager manager = new FamilyContactManager();
-            Person person = new Person("John", "Family", "1986-10-12", "john@example.com", "1234567898");
-            person.addCustomEvent(new Event("Birthday", "2009-02-25", "John's birthday"));
+            Person person = new Person("John", "Family", this.eventDate, "john@example.com", 1234567898);
+            person.addEvent(new Event("Birthday", this.eventDate, "John's birthday"));
             manager.addPerson(person);
             JsonWriter jsonWriter = new JsonWriter(TEST_FILE);
             jsonWriter.open();
@@ -63,14 +72,14 @@ class JsonWriterTest extends JsonTest {
             Person readPerson = people.get(0);
             assertEquals("John", readPerson.getName());
             assertEquals("Family", readPerson.getRelationship());
-            assertEquals("1986-10-12", readPerson.getBirthdate());
-            assertEquals("john@example.com", readPerson.getEmail());
-            assertEquals("1234567898", readPerson.getPhoneNumber());
-            List<Event> events = readPerson.getCustomEvents();
+            assertEquals(this.eventDate, readPerson.getBirthdate());
+            assertEquals("john@example.com", readPerson.getEmailID());
+            assertEquals(1234567898, readPerson.getPhoneNumber());
+            List<Event> events = readPerson.getEvents();
             assertEquals(1, events.size());
             Event readEvent = events.get(0);
             assertEquals("Birthday", readEvent.getEventName());
-            assertEquals("2009-02-25", readEvent.getEventDate());
+            assertEquals(this.eventDate, readEvent.getEventDate());
             assertEquals("John's birthday", readEvent.getEventDescription());
 
         } catch (IOException e) {

@@ -7,6 +7,7 @@ import model.Person;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,11 +15,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // The 'FamilyContactManagerApp' class represents an application for managing family contacts and
-// the custom events associated with them.
+// the events associated with each unique contact.
 // It provides a menu-driven interface to add, view, update, save to a JSON file, load from a JSON
-// file and delete family contacts and any custom events associated with each unique Person object.
+// file and delete family contacts and any events associated with each unique Person object.
 public class FamilyContactManagerApp {
-    private FamilyContactManager contactManager;
+    private FamilyContactManager familyContactManager;
     private Scanner scanner;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -27,7 +28,7 @@ public class FamilyContactManagerApp {
     // EFFECTS: Constructs a FamilyContactManagerApp object by initializing the
     // objects for 'FamilyContactManager' class and 'Scanner' class to take user input
     public FamilyContactManagerApp() {
-        contactManager = new FamilyContactManager();
+        familyContactManager = new FamilyContactManager();
         scanner = new Scanner(System.in);
         jsonWriter = new JsonWriter("./data/contacts.json");
         jsonReader = new JsonReader("./data/contacts.json");
@@ -55,7 +56,7 @@ public class FamilyContactManagerApp {
             } else if (choice == 5) {
                 loadContacts();
             } else if (choice == 6) {
-                saveAndExit();
+                saveContacts();
             } else if (choice == 7) {
                 break;
             } else {
@@ -73,12 +74,12 @@ public class FamilyContactManagerApp {
     // EFFECTS: Displays a menu with options and asks the user to enter a choice
     private void displayMenu() {
         System.out.println("Please choose from the following menu: ");
-        System.out.println("1. Add new contact");
-        System.out.println("2. View all contacts");
-        System.out.println("3. Delete contact");
-        System.out.println("4. Update contact details");
-        System.out.println("5. Load database from file");
-        System.out.println("6. Save database to file");
+        System.out.println("1. Add a new contact to your contact list");
+        System.out.println("2. View all contacts from your contact list");
+        System.out.println("3. Delete a contact from your contact list");
+        System.out.println("4. Update a contact's details in your contact list");
+        System.out.println("5. Load your contact database from a JSON file");
+        System.out.println("6. Save your contact database to a JSON file");
         System.out.println("7. Exit");
         System.out.print("Enter your choice: ");
     }
@@ -87,61 +88,70 @@ public class FamilyContactManagerApp {
     // Phone number should not contain alphabets
     // EFFECTS:  Creates a new 'Person' object, adds it to the 'contactManager' based
     // on the inputs of the contact details entered by the user
-    // Also allows the user to add custom events if desired
+    // Also allows the user to add associated events if desired
     // Makes use of a helper/extracted method to stay within allowed method length
     private void addNewContact() {
         Person person = getPerson();
         while (true) {
-            System.out.print("Do you wish to add a custom event? (y/n): ");
+            System.out.print("Do you wish to add an event associated for this contact? (y/n): ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("y")) {
-                System.out.print("Enter custom event name: ");
+                System.out.print("Enter the event's name: ");
                 String eventName = scanner.nextLine();
-                System.out.print("Enter custom event date: ");
-                String eventDate = scanner.nextLine();
-                System.out.print("Enter custom event description: ");
+                System.out.print("Enter the event's date (YYYY-MM-DD): ");
+                LocalDate eventDate = LocalDate.parse(scanner.nextLine());
+                System.out.print("Enter the event's description: ");
                 String eventDescription = scanner.nextLine();
                 Event event = new Event(eventName, eventDate, eventDescription);
-                person.addCustomEvent(event);
+                person.addEvent(event);
             } else if (choice.equalsIgnoreCase("n")) {
                 break;
             } else {
                 System.out.println("Invalid choice! Please try again.");
             }
         }
-        contactManager.addPerson(person);
-        System.out.println("Contact added successfully!");
+        familyContactManager.addPerson(person);
+        System.out.println("The contact was successfully added to your contact list!");
     }
 
     // Helper method to reduce length of addNewContact() method
     private Person getPerson() {
         System.out.print("Enter person's name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter person's relation: ");
+        System.out.print("Enter person's relationship: ");
         String relation = scanner.nextLine();
-        System.out.print("Enter person's birthday: ");
-        String birthday = scanner.nextLine();
-        System.out.print("Enter person's email: ");
-        String email = scanner.nextLine();
-        System.out.print("Enter person's phone number: ");
-        String phoneNumber = scanner.nextLine();
-        Person person = new Person(name, relation, birthday, email, phoneNumber);
+        System.out.print("Enter person's birthdate (YYYY-MM-DD): ");
+        LocalDate birthdate = LocalDate.parse(scanner.nextLine());
+        System.out.print("Enter person's email ID: ");
+        String emailID = scanner.nextLine();
+        int phoneNumber = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            System.out.print("Enter phone number (as an integer): ");
+            try {
+                phoneNumber = Integer.parseInt(scanner.nextLine());
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid phone number using integers only.");
+            }
+        }
+        Person person = new Person(name, relation, birthdate, emailID, phoneNumber);
         return person;
     }
 
-    // EFFECTS: Returns and retrieves the list of family contacts and custom events associated with
+    // EFFECTS: Returns and retrieves the list of family contacts and events associated with
     // unique contacts and displays them as output
     private void viewAllContacts() {
-        List<Person> contacts = contactManager.getAllContacts();
+        List<Person> contacts = familyContactManager.getAllContacts();
         if (contacts.isEmpty()) {
-            System.out.println("No contacts found.");
+            System.out.println("There were no contacts found in your contact list.");
         }
-        System.out.println("All Contacts:");
+        System.out.println("Here are all your contacts:");
         for (Person contact : contacts) {
             System.out.println(contact);
-            List<Event> customEvents = contact.getCustomEvents();
+            List<Event> customEvents = contact.getEvents();
             if (!customEvents.isEmpty()) {
-                System.out.println("Custom Events:");
+                System.out.println("Associated Events:");
                 for (Event event : customEvents) {
                     System.out.println(event);
                 }
@@ -153,32 +163,31 @@ public class FamilyContactManagerApp {
     // MODIFIES: this
     // EFFECTS: Removes the specified contact from 'contactManager'
     private void deleteContact() {
-        System.out.print("Enter the name of the contact to be deleted: ");
+        System.out.print("Enter the name of the contact you wish to be deleted from your contact list: ");
         String name = scanner.nextLine();
-        contactManager.deletePerson(name);
-        System.out.println("Contact deleted successfully.");
+        familyContactManager.deletePerson(name);
+        System.out.println("The contact was successfully deleted from your contact list!");
     }
 
-    // REQUIRES: inputs should be case-sensitive and to be in proper format and readable
     // Phone number should not contain alphabets
     // MODIFIES: this
-    // EFFECTS: Enables user to update the relationship, birthday, email, and phone number of a
+    // EFFECTS: Enables user to update the relationship, birthdate, email ID, and phone number of a
     // contact
-    // Also provides option to update unique custom events associated with the contact.
+    // Also provides option to update unique events associated with the contact.
     // Makes use of several helper/extracted methods to stay within allowed method length
     private void updateContactDetails() {
         Person person = getPerson1();
         if (person != null) {
             Result result = getResult(person);
             while (true) {
-                System.out.print("Update custom events? (y/n): ");
+                System.out.print("Do you wish to update associated events for this contact? (y/n): ");
                 String choice = scanner.nextLine();
                 if (choice.equalsIgnoreCase("y")) {
                     Event existingEvent = getEvent(person);
                     if (existingEvent != null) {
                         extractedMethod2(existingEvent);
                     } else {
-                        System.out.println("Event not found for this person.");
+                        System.out.println("The event was not found associated with this contact.");
                     }
                 } else if (choice.equalsIgnoreCase("n")) {
                     break;
@@ -188,76 +197,87 @@ public class FamilyContactManagerApp {
             }
             extractedMethod3(person, result);
         } else {
-            System.out.println("Contact not found.");
+            System.out.println("The contact was not found in your contact list!");
         }
     }
 
     // Helper method to reduce length of updateContactDetails() method
     private Result getResult(Person person) {
-        System.out.println("Current contact details:");
+        System.out.println("Here are the current contact details of this person:");
         System.out.println(person);
-        System.out.print("Enter new relation: ");
+        System.out.print("Enter the updated relationship: ");
         String relation = this.scanner.nextLine();
-        System.out.print("Enter new birthday: ");
-        String birthday = this.scanner.nextLine();
-        System.out.print("Enter new email: ");
+        System.out.print("Enter the updated birthdate (YYYY-MM-DD): ");
+        LocalDate birthdate = LocalDate.parse(this.scanner.nextLine());
+        System.out.print("Enter the updated email ID: ");
         String email = this.scanner.nextLine();
-        System.out.print("Enter new phone number: ");
-        String phoneNumber = this.scanner.nextLine();
-        Result result = new Result(relation, birthday, email, phoneNumber);
+        int updatedPhoneNumber = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            System.out.print("Enter the updated phone number (as an integer): ");
+            try {
+                updatedPhoneNumber = Integer.parseInt(scanner.nextLine());
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid phone number using integers only.");
+            }
+        }
+        Result result = new Result(relation, birthdate, email, updatedPhoneNumber);
         return result;
     }
 
     // Helper method to reduce length of updateContactDetails() method
     private void extractedMethod2(Event existingEvent) {
-        System.out.print("Enter updated event date: ");
-        String eventDate = this.scanner.nextLine();
-        System.out.print("Enter updated event description: ");
-        String eventDescription = this.scanner.nextLine();
+        System.out.print("Enter the event's updated date (YYYY-MM-DD): ");
+        LocalDate eventDate = LocalDate.parse(this.scanner.nextLine());
         existingEvent.setEventDate(eventDate);
+        System.out.print("Enter the event's updated description: ");
+        String eventDescription = this.scanner.nextLine();
         existingEvent.setEventDescription(eventDescription);
-        System.out.println("Custom event updated successfully.");
+        System.out.println("The associated event has been successfully updated!");
     }
 
     // Helper method to reduce length of updateContactDetails() method
     private static void extractedMethod3(Person person, Result result) {
-        person.setRelationship(result.relation);
-        person.setBirthdate(result.birthday);
-        person.setEmail(result.email);
+        person.setRelationship(result.relationship);
+        person.setBirthdate(result.birthdate);
+        person.setEmailID(result.email);
         person.setPhoneNumber(result.phoneNumber);
-        System.out.println("Contact details updated successfully.");
+        System.out.println("The contact details have been successfully updated!");
     }
 
     // Helper method to reduce length of updateContactDetails() method
     private Event getEvent(Person person) {
-        System.out.print("Enter event name: ");
+        System.out.print("Enter the name of the event: ");
         String eventName = this.scanner.nextLine();
-        Event existingEvent = person.getCustomEventByName(eventName);
+        Event existingEvent = person.getEventByName(eventName);
         return existingEvent;
     }
 
     // Helper method to reduce length of updateContactDetails() method
     private Person getPerson1() {
-        System.out.print("Enter the name of the contact to update: ");
+        System.out.print("Enter the name of the contact you wish to update: ");
         String name = this.scanner.nextLine();
-        Person person = this.contactManager.getPersonByName(name);
+        Person person = this.familyContactManager.getPersonByName(name);
         return person;
     }
 
     // Helper class for getResult() helper method
     private static class Result {
-        public final String relation;
-        public final String birthday;
+        public final String relationship;
+        public final LocalDate birthdate;
         public final String email;
-        public final String phoneNumber;
+        public final int phoneNumber;
 
-        // REQUIRES: phoneNumber and birthday should be in appropriate format of data String type
+        // REQUIRES: 'phoneNumber' and 'birthdate' should be in appropriate format of data int and
+        // LocalDate types respectively, as must the other fields be in String format
         // MODIFIES: this
         // EFFECTS: Constructs a Result object by initializing the given object with
-        // a relation, birthday, email and phoneNumber
-        public Result(String relation, String birthday, String email, String phoneNumber) {
-            this.relation = relation;
-            this.birthday = birthday;
+        // a relationship, birthdate, email and phoneNumber ('phoneNumber' and 'birthdate' in int and
+        // LocalDate types respectively, and all other fields in String format)
+        public Result(String relationship, LocalDate birthdate, String email, int phoneNumber) {
+            this.relationship = relationship;
+            this.birthdate = birthdate;
             this.email = email;
             this.phoneNumber = phoneNumber;
         }
@@ -269,11 +289,11 @@ public class FamilyContactManagerApp {
     private void saveContacts() {
         try {
             this.jsonWriter.open();
-            this.jsonWriter.write(this.contactManager);
+            this.jsonWriter.write(this.familyContactManager);
             this.jsonWriter.close();
-            System.out.println("Data saved successfully.");
+            System.out.println("The data was successfully saved!");
         } catch (FileNotFoundException e) {
-            System.out.println("Error saving data to file: " + e.getMessage());
+            System.out.println("There is an error saving data to the JSON file: " + e.getMessage());
         }
     }
 
@@ -282,16 +302,10 @@ public class FamilyContactManagerApp {
     // displays an error message accordingly
     private void loadContacts() {
         try {
-            this.contactManager = this.jsonReader.read();
-            System.out.println("Data loaded successfully.");
+            this.familyContactManager = this.jsonReader.read();
+            System.out.println("The data was successfully loaded!");
         } catch (IOException e) {
-            System.out.println("Error loading data from file: " + e.getMessage());
+            System.out.println("There is an error loading data from the JSON file: " + e.getMessage());
         }
-    }
-
-    // EFFECTS: Calls the saveContacts() method to save the data and displays an exit message
-    private void saveAndExit() {
-        saveContacts();
-        System.out.println("Goodbye!");
     }
 }

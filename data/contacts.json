@@ -1,22 +1,30 @@
 {"familyContacts": [
     {
-        "birthday": "t",
-        "phoneNumber": "t",
-        "customEvents": [{
-            "eventDescription": "g",
-            "eventName": "g",
-            "eventDate": "g"
-        }],
-        "name": "t",
-        "relationship": "t",
-        "email": "t"
+        "birthday": "2004-03-04",
+        "phoneNumber": 123456789,
+        "Associated Events": [],
+        "name": "Daksh",
+        "relationship": "Friend",
+        "email": "daksh.mathur@outlook.com"
     },
     {
-        "birthday": "hh",
-        "phoneNumber": "h",
-        "customEvents": [],
-        "name": "h",
-        "relationship": "h",
-        "email": "h"
+        "birthday": "2007-12-09",
+        "phoneNumber": 33222,
+        "Associated Events": [],
+        "name": "jefh",
+        "relationship": "ejefhj",
+        "email": "rhfr"
+    },
+    {
+        "birthday": "2007-11-11",
+        "phoneNumber": 122,
+        "Associated Events": [{
+            "eventDescription": "jd",
+            "eventName": "hfhe",
+            "eventDate": "2008-09-08"
+        }],
+        "name": "jefje",
+        "relationship": "bfjf",
+        "email": "jefe"
     }
 ]}

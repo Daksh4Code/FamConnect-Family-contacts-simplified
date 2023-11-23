@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -56,18 +57,20 @@ public class JsonReader {
             JSONObject personJson = (JSONObject) obj;
             String name = personJson.getString("name");
             String relationship = personJson.getString("relationship");
-            String birthday = personJson.getString("birthday");
-            String email = personJson.getString("email");
-            String phoneNumber = personJson.getString("phoneNumber");
-            Person person = new Person(name, relationship, birthday, email, phoneNumber);
-            JSONArray customEventsJson = personJson.getJSONArray("customEvents");
-            for (Object eventObj : customEventsJson) {
+            String birthdateString = personJson.getString("birthday");
+            LocalDate birthdate = LocalDate.parse(birthdateString);
+            String emailID = personJson.getString("email");
+            int phoneNumber = personJson.getInt("phoneNumber");
+            Person person = new Person(name, relationship, birthdate, emailID, phoneNumber);
+            JSONArray associatedEventsJson = personJson.getJSONArray("Associated Events");
+            for (Object eventObj : associatedEventsJson) {
                 JSONObject eventJson = (JSONObject) eventObj;
                 String eventName = eventJson.getString("eventName");
-                String eventDate = eventJson.getString("eventDate");
+                String eventDateString = eventJson.getString("eventDate");
+                LocalDate eventDate = LocalDate.parse(eventDateString);
                 String eventDescription = eventJson.getString("eventDescription");
-                Event customEvent = new Event(eventName, eventDate, eventDescription);
-                person.addCustomEvent(customEvent);
+                Event associatedEvent = new Event(eventName, eventDate, eventDescription);
+                person.addEvent(associatedEvent);
             }
             manager.addPerson(person);
         }

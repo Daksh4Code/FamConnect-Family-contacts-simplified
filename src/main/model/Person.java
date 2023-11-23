@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,42 +10,90 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // The 'Person' class represents an individual person in the family contact management system.
-// It contains information about a person including their name, relationship to the user, birthday,
-// email, phone number, and any custom events associated with them which the user chooses to add.
-// Custom events are unique to a person, and can include anything from anniversaries to graduation
+// It contains information about a person including their name, relationship to the user, birthdate,
+// email, phone number, and any events associated with them which the user chooses to add.
+// Events are unique to a person, and can include anything from anniversaries to graduation
 // ceremonies.
-// This class provides methods to set and retrieve the person's attributes.
+// This class provides methods to set and retrieve the person's attributes, along with methods to
+// add, retrieve, delete, update, and list events related to each contact (i.e., each Person object).
 // It also implements the Writable interface and contains a toJson() method which returns the
 // Person object and associated details in JSON format.
 public class Person implements Writable {
     private String name;
     private String relationship;
-    private String birthdate;
-    private String email;
-    private String phoneNumber;
-    private List<Event> customEvents;
+    private LocalDate birthdate;
+    private String emailID;
+    private int phoneNumber;
+    private List<Event> events;
 
-    // REQUIRES: phoneNumber and birthdate should be in appropriate format of data String type
+    // REQUIRES: 'phoneNumber', 'events' and 'birthdate' should be in appropriate format of data int,
+    // List and LocalDate types respectively, as must the other fields be in String format
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation, birthday,
-    // email and phone number (all in String format to maintain uniformity and ease of maintenance)
-    public Person(String name, String relation, String birthdate, String email, String phoneNumber) {
+    // email ID and phone number ('phoneNumber', 'events' and 'birthdate' in int, List and
+    // LocalDate types respectively, and all other fields in String format)
+    public Person(String name, String relation, LocalDate birthdate, String emailID, int phoneNumber) {
         this.name = name;
         this.relationship = relation;
         this.birthdate = birthdate;
-        this.email = email;
+        this.emailID = emailID;
         this.phoneNumber = phoneNumber;
-        this.customEvents = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
-    // REQUIRES: birthdate should be in appropriate format of data String type
+    // REQUIRES: 'birthdate' should be in appropriate format of data LocalDate type
     // MODIFIES: this
     // EFFECTS: Constructs a Person object with given name, relation and birthday
-    // (all in String format)
-    public Person(String name, String relation, String birthdate) {
+    // (all in String format except 'birthdate' which is in LocalDate format)
+    public Person(String name, String relation, LocalDate birthdate) {
         this.name = name;
         this.relationship = relation;
         this.birthdate = birthdate;
+    }
+
+    // REQUIRES: 'event' should not be null
+    // MODIFIES: this
+    // EFFECTS: Adds an event to the list of events associated with the person, and does nothing
+    // if event is null
+    public void addEvent(Event event) {
+        if (event != null) {
+            this.events.add(event);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Removes the Event object with the specified event name from
+    // the list of events associated with the person, and does nothing if the event name is null
+    public void deleteEvent(String eventName) {
+        Event event = getEventByName(eventName);
+        if (event != null) {
+            this.events.remove(event);
+        }
+    }
+
+    // REQUIRES: 'eventName' should not be null
+    // EFFECTS: Retrieves and returns an event by its specified event name from the person's
+    // list of events, returns null if the event name is not found in the list of events associated
+    // with the person
+    public Event getEventByName(String eventName) {
+        for (Event event : this.events) {
+            if (event.getEventName().equals(eventName)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
+    // REQUIRES: 'eventName', 'updatedEvent' should not be null
+    // MODIFIES: this
+    // EFFECTS: Updates the Event object with the specified event name from
+    // the list of events
+    public void updateEvent(String eventName, Event updatedEvent) {
+        Event event = getEventByName(eventName);
+        if (event != null) {
+            event.setEventDate(updatedEvent.getEventDate());
+            event.setEventDescription(updatedEvent.getEventDescription());
+        }
     }
 
     // Getter methods
@@ -57,20 +106,20 @@ public class Person implements Writable {
         return this.relationship;
     }
 
-    public String getBirthdate() {
+    public LocalDate getBirthdate() {
         return this.birthdate;
     }
 
-    public String getEmail() {
-        return this.email;
+    public String getEmailID() {
+        return this.emailID;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return this.phoneNumber;
     }
 
-    public List<Event> getCustomEvents() {
-        return this.customEvents;
+    public List<Event> getEvents() {
+        return this.events;
     }
 
     // Setter methods
@@ -83,49 +132,30 @@ public class Person implements Writable {
         this.relationship = relationship;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailID(String emailID) {
+        this.emailID = emailID;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    // REQUIRES: 'event' should not be null
-    // MODIFIES: this
-    // EFFECTS: Adds a custom event to the list of custom events associated with the person
-    public void addCustomEvent(Event event) {
-        this.customEvents.add(event);
-    }
-
-    // REQUIRES: 'eventName' should not be null
-    // EFFECTS: Retrieves and returns a custom event by its specified event name from the person's
-    // list of custom events
-    public Event getCustomEventByName(String eventName) {
-        for (Event event : this.customEvents) {
-            if (event.getEventName().equals(eventName)) {
-                return event;
-            }
-        }
-        return null;
-    }
-
     // EFFECTS: Retrieves and returns a well formatted string representation of the person,
-    // including their name, relationship, birthday, email, phone number, and a list of
-    // custom events - if any are associated with the person.
+    // including their name, relationship, birthdate, email ID, phone number, and a list of
+    // events - if any are associated with the person.
     @Override
     public String toString() {
-        String result = "Person{Name='" + this.name  + "', Relationship='"
-                + this.relationship + "', Birthday='" + this.birthdate
-                + "', Email='" + this.email + "', Phone Number='" + this.phoneNumber;
-        if (!this.customEvents.isEmpty()) {
-            result += ", Custom Events=[";
+        String result = "Person{name = '" + this.name  + "', relationship = '"
+                + this.relationship + "', birthday = '" + this.birthdate.toString()
+                + "', email = '" + this.emailID + "', phoneNumber = '" + this.phoneNumber;
+        if (!this.events.isEmpty()) {
+            result += ", Associated Events = [";
             boolean bool = true;
-            for (Event event : this.customEvents) {
+            for (Event event : this.events) {
                 if (!bool) {
                     result += ", ";
                 }
@@ -145,14 +175,14 @@ public class Person implements Writable {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
         jsonObject.put("relationship", relationship);
-        jsonObject.put("birthday", birthdate);
-        jsonObject.put("email", email);
+        jsonObject.put("birthday", birthdate.toString());
+        jsonObject.put("email", emailID);
         jsonObject.put("phoneNumber", phoneNumber);
-        JSONArray customEventsArray = new JSONArray();
-        for (Event event : customEvents) {
-            customEventsArray.put(event.toJson());
+        JSONArray associatedEventsArray = new JSONArray();
+        for (Event event : events) {
+            associatedEventsArray.put(event.toJson());
         }
-        jsonObject.put("customEvents", customEventsArray);
+        jsonObject.put("Associated Events", associatedEventsArray);
         return jsonObject;
     }
 }
