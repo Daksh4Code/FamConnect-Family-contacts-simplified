@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+// Test class to test methods from the FamilyContactManager class
 public class TestFamilyContactManager {
     private FamilyContactManager contactManager;
-    LocalDate eventDate = LocalDate.of(2004, 7, 10);
+    private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 
     @BeforeEach
     public void runBefore() {
@@ -56,16 +57,6 @@ public class TestFamilyContactManager {
         contactManager.deletePerson("Alice");
         assertEquals(0, contactManager.getAllContacts().size());
     }
-
-
-
-    @Test
-    public void testUpdatePersonDetailsWithNullPerson() {
-        Person person = null;
-        contactManager.updatePersonDetails("John", person);
-        assertNull(person);
-    }
-
 
     @Test
     public void testGetPersonByNameNotFound() {

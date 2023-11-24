@@ -86,6 +86,18 @@ database. **(CUSTOM)**
 - As a user, I want the ability to delete
 contacts and their associated details from my
 database. **(CUSTOM)**
+- As a user, I want the ability to search
+for contacts and their associated details from my
+database based on a certain criteria. **(CUSTOM)**
+- As a user, when the application's main menu is
+displayed, I want to be given the option of saving
+the contacts and their associated details so far to
+a file. **(REQUIRED/SAVING)**
+- As a user, when I start the application, I want to
+be given the option of (re)loading the contacts and
+their associated details added so far from the file,
+from the previous run, and resume from there.
+**(REQUIRED/LOADING)**
 ## In phase 1:
 - As a user, I want to be able to add new
 individuals (names) to my family contact database.
@@ -108,8 +120,53 @@ database. **(CUSTOM)**
 - As a user, when the application's main menu is 
 displayed, I want to be given the option of saving 
 the contacts and their associated details so far to 
-a file.
+a file. **(REQUIRED/SAVING)**
 - As a user, when I start the application, I want to 
 be given the option of (re)loading the contacts and 
 their associated details added so far from the file, 
-from the previous run, and resume from there. 
+from the previous run, and resume from there.
+**(REQUIRED/LOADING)**
+- As a user, I want the ability to delete
+contacts and their associated details from my
+database. **(CUSTOM)**
+
+## In phase 3:
+- As a user, I want the ability to search
+for contacts and their associated details from my
+database based on a certain criteria. **(CUSTOM)**
+
+# Instructions for Grader
+- You can generate the first required action related to 
+the user story "adding multiple Xs to a Y" by clicking on
+the 'Add Contact' button on the GUI. Here, you can add 
+multiple 'Person' objects along with its subsequent 
+details to a list of contacts. Apart from basic details 
+such as the relation or phone number, you can also add 
+multiple events associated with 'Person' objects, using 
+objects of the 'Event' class, and unique to each 'Person' 
+object.
+- You can view the panel in which "all the Xs that have
+already been added to Y" are displayed by clicking on 
+the 'View Contacts' button on the GUI. Here, you can 
+view a list of all the 'Person' objects added so far/loaded
+from a previous run. The 'Person' objects are displayed 
+including all details as well as the details all the 
+subsequent unique 'Event' objects associated with each 
+Person object, if any. The details of each 'Event' object 
+include an event name, an event date and an event description.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+- You can locate my visual component in the first few seconds
+before the main GUI opens and runs. In the first few seconds,
+a splash screen with a strikingly colourful image, a 
+welcome message and a loading bar pops up. Once the 
+loading bar is complete and the main GUI opens, this 
+splash screen closes.
+- You can save the state of my application by clicking on 
+the 'Save Contacts' button on the GUI. This will save all the 
+contacts added so far to a file.
+- You can reload the state of my application by clicking on
+the 'Load Contacts' button on the GUI. This will load all the
+contacts (which were saved to a file in a previous run) 
+from a file.
+
+

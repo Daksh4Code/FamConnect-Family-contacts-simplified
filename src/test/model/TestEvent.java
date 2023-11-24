@@ -1,15 +1,16 @@
 package model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+// Test class to test methods from the Event class
 public class TestEvent {
     private Event event;
-    LocalDate eventDate = LocalDate.of(2004, 7, 10);
+    private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 
     @BeforeEach
     public void runBefore() {
@@ -36,7 +37,7 @@ public class TestEvent {
     @Test
     public void testToString() {
         Event event = new Event("Bachelor party", eventDate, "Alice's bachelor party celebration");
-        String expected = "Event{eventName = 'Bachelor party', eventDate = '2004-07-10', eventDescription = 'Alice's bachelor party celebration'}";
+        String expected = "Event{eventName='Bachelor party', eventDate='2004-07-10', eventDescription='Alice's bachelor party celebration'}";
         assertEquals(expected, event.toString());
     }
 

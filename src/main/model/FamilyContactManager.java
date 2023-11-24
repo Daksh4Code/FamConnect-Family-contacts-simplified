@@ -16,10 +16,17 @@ public class FamilyContactManager implements Writable {
     private List<Person> familyContacts;
 
     // MODIFIES: this
-    // EFFECTS: Constructs a family contact manager object with one (initially empty) list - for
-    // family contacts
+    // EFFECTS: A no parameter constructor that constructs a family contact manager object with one
+    // (initially empty) list - for family contacts
     public FamilyContactManager() {
         this.familyContacts = new ArrayList<>();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Constructs a family contact manager object with one (initially empty) list - for
+    // family contacts
+    public FamilyContactManager(List<Person> personList) {
+        this.familyContacts = personList;
     }
 
     // MODIFIES: this
@@ -41,7 +48,6 @@ public class FamilyContactManager implements Writable {
         }
     }
 
-    // REQUIRES: 'name' should not be null
     // EFFECTS: Retrieves and returns the Person object with the specified name from
     // the list of family contacts, and returns null if the name is not found in the list
     // of family contacts

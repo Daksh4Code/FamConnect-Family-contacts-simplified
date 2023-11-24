@@ -8,7 +8,9 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.time.LocalDate;
+
 import java.util.List;
+
 import java.util.Scanner;
 
 import java.io.FileNotFoundException;
@@ -26,7 +28,8 @@ public class FamilyContactManagerApp {
 
     // MODIFIES: this
     // EFFECTS: Constructs a FamilyContactManagerApp object by initializing the
-    // objects for 'FamilyContactManager' class and 'Scanner' class to take user input
+    // objects for 'FamilyContactManager' class, required JsonReader and JsonWriter, and 'Scanner'
+    // class to take user input
     public FamilyContactManagerApp() {
         familyContactManager = new FamilyContactManager();
         scanner = new Scanner(System.in);
@@ -65,9 +68,9 @@ public class FamilyContactManagerApp {
         }
     }
 
-    // Helper method to reduce length of start() method
+    // EFFECTS: Acts as a helper method to reduce length of start() method
     private static void extractedMethod() {
-        System.out.println("Welcome to FamConnect Version 1!");
+        System.out.println("Welcome to FamConnect!");
         System.out.println("Your personal family contact manager awaits you.");
     }
 
@@ -88,7 +91,7 @@ public class FamilyContactManagerApp {
     // Phone number should not contain alphabets
     // EFFECTS:  Creates a new 'Person' object, adds it to the 'contactManager' based
     // on the inputs of the contact details entered by the user
-    // Also allows the user to add associated events if desired
+    // Also allows the user to add multiple associated events and subsequent details if desired
     // Makes use of a helper/extracted method to stay within allowed method length
     private void addNewContact() {
         Person person = getPerson();
@@ -114,7 +117,7 @@ public class FamilyContactManagerApp {
         System.out.println("The contact was successfully added to your contact list!");
     }
 
-    // Helper method to reduce length of addNewContact() method
+    // EFFECTS: Acts as a helper method to reduce length of addNewContact() method
     private Person getPerson() {
         System.out.print("Enter person's name: ");
         String name = scanner.nextLine();
@@ -139,8 +142,8 @@ public class FamilyContactManagerApp {
         return person;
     }
 
-    // EFFECTS: Returns and retrieves the list of family contacts and events associated with
-    // unique contacts and displays them as output
+    // EFFECTS: Returns and retrieves the list and subsequent details of all family contacts and
+    // unique events associated with the contacts and displays them as output
     private void viewAllContacts() {
         List<Person> contacts = familyContactManager.getAllContacts();
         if (contacts.isEmpty()) {
@@ -161,7 +164,7 @@ public class FamilyContactManagerApp {
 
     // REQUIRES: contact name should exist in contact list already, inputs are case-sensitive
     // MODIFIES: this
-    // EFFECTS: Removes the specified contact from 'contactManager'
+    // EFFECTS: Removes the specified contact from the list of contacts
     private void deleteContact() {
         System.out.print("Enter the name of the contact you wish to be deleted from your contact list: ");
         String name = scanner.nextLine();
@@ -169,11 +172,10 @@ public class FamilyContactManagerApp {
         System.out.println("The contact was successfully deleted from your contact list!");
     }
 
-    // Phone number should not contain alphabets
     // MODIFIES: this
     // EFFECTS: Enables user to update the relationship, birthdate, email ID, and phone number of a
     // contact
-    // Also provides option to update unique events associated with the contact.
+    // Also provides the option to update the details of the unique events associated with the contact
     // Makes use of several helper/extracted methods to stay within allowed method length
     private void updateContactDetails() {
         Person person = getPerson1();
@@ -201,7 +203,7 @@ public class FamilyContactManagerApp {
         }
     }
 
-    // Helper method to reduce length of updateContactDetails() method
+    // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private Result getResult(Person person) {
         System.out.println("Here are the current contact details of this person:");
         System.out.println(person);
@@ -226,7 +228,7 @@ public class FamilyContactManagerApp {
         return result;
     }
 
-    // Helper method to reduce length of updateContactDetails() method
+    // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private void extractedMethod2(Event existingEvent) {
         System.out.print("Enter the event's updated date (YYYY-MM-DD): ");
         LocalDate eventDate = LocalDate.parse(this.scanner.nextLine());
@@ -237,7 +239,7 @@ public class FamilyContactManagerApp {
         System.out.println("The associated event has been successfully updated!");
     }
 
-    // Helper method to reduce length of updateContactDetails() method
+    // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private static void extractedMethod3(Person person, Result result) {
         person.setRelationship(result.relationship);
         person.setBirthdate(result.birthdate);
@@ -246,7 +248,7 @@ public class FamilyContactManagerApp {
         System.out.println("The contact details have been successfully updated!");
     }
 
-    // Helper method to reduce length of updateContactDetails() method
+    // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private Event getEvent(Person person) {
         System.out.print("Enter the name of the event: ");
         String eventName = this.scanner.nextLine();
@@ -254,7 +256,7 @@ public class FamilyContactManagerApp {
         return existingEvent;
     }
 
-    // Helper method to reduce length of updateContactDetails() method
+    // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private Person getPerson1() {
         System.out.print("Enter the name of the contact you wish to update: ");
         String name = this.scanner.nextLine();
@@ -262,7 +264,7 @@ public class FamilyContactManagerApp {
         return person;
     }
 
-    // Helper class for getResult() helper method
+    // EFFECTS: Acts as a helper class for getResult() helper method
     private static class Result {
         public final String relationship;
         public final LocalDate birthdate;

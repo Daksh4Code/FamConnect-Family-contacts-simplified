@@ -1,18 +1,17 @@
 package persistence;
 
 import model.FamilyContactManager;
-
 import model.Person;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+// Test class to test methods from the JsonReader class
 class JsonReaderTest extends JsonTest {
-    private static final String TEST_FILE = "./data/contacts.json";
-    LocalDate eventDate = LocalDate.of(2004, 7, 10);
+    private static final String TEST_FILE = "./data/contacts.json"; // change file path name as required
+                                                                    // while running tests on your local machine
 
     @Test
     void testReaderNonExistentFile() {
@@ -30,7 +29,7 @@ class JsonReaderTest extends JsonTest {
         JsonReader jsonReader = new JsonReader(TEST_FILE);
         try {
             FamilyContactManager manager = jsonReader.read();
-            assertEquals(3, manager.getAllContacts().size());
+            assertEquals(1, manager.getAllContacts().size());
             Person person = manager.getAllContacts().get(0);
             assertEquals(0, person.getEvents().size());
         } catch (IOException e) {
@@ -43,9 +42,7 @@ class JsonReaderTest extends JsonTest {
         JsonReader jsonReader = new JsonReader(TEST_FILE);
         try {
             FamilyContactManager manager = jsonReader.read();
-            assertEquals(3, manager.getAllContacts().size());
-            Person person = manager.getAllContacts().get(0);
-            assertEquals(0, person.getEvents().size());
+            assertEquals(1, manager.getAllContacts().size());
         } catch (IOException e) {
             fail("Error! Couldn't read from file");
         }

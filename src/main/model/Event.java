@@ -1,17 +1,15 @@
 package model;
 
 import org.json.JSONObject;
-
 import persistence.Writable;
-
 import java.time.LocalDate;
 
 // The 'Event' class represents specific events associated with a (unique) person object in the family
 // contact management system.
 // It contains information about the event's name, date, and a brief description, where the event's name
-// and description are represented by strings and the event's date is in the date format.
-// A standard event (or more) like a birthdate created by the user can be added to a person's profile
-// (the person object) to keep track of events and their dates.
+// and description are represented by strings and the event's date is in the LocalDate format.
+// A standard event (or more) like a birthdate/graduation date created by the user can be added to a
+// person's profile (the person object) to keep track of events and their dates.
 // This class provides methods to set and retrieve the event attributes.
 // It also implements the Writable interface and contains a toJson() method which returns the
 // Event object in JSON format.
@@ -24,7 +22,7 @@ public class Event implements Writable {
     // 'eventName' and 'eventDescription' be in String format
     // MODIFIES: this
     // EFFECTS: Constructs an Event object with given event name, event date and event
-    // description ('eventName' and 'eventDescription' in LocalDate format, 'eventDate' in LocalDate format)
+    // description ('eventName' and 'eventDescription' in String format, 'eventDate' in LocalDate format)
     public Event(String eventName, LocalDate eventDate, String eventDescription) {
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -60,12 +58,12 @@ public class Event implements Writable {
     }
 
     // EFFECTS: Returns a String representation of the event name, event date and the event
-    // description within a single curly bracket
+    // description within a single pair of curly brackets
     @Override
     public String toString() {
-        return ("Event{" + "eventName = '" + this.eventName
-                + '\'' + ", eventDate = '" + this.eventDate.toString() + '\''
-                + ", eventDescription = '" + this.eventDescription + '\'' + '}');
+        return ("Event{" + "eventName='" + this.eventName
+                + '\'' + ", eventDate='" + this.eventDate.toString() + '\''
+                + ", eventDescription='" + this.eventDescription + '\'' + '}');
     }
 
     // MODIFIES: this

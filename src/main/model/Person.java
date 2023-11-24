@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import org.json.JSONObject;
 
 import persistence.Writable;
 
-// The 'Person' class represents an individual person in the family contact management system.
+// The 'Person' class represents an individual contact in the family contact management system.
 // It contains information about a person including their name, relationship to the user, birthdate,
 // email, phone number, and any events associated with them which the user chooses to add.
 // Events are unique to a person, and can include anything from anniversaries to graduation
@@ -29,8 +30,8 @@ public class Person implements Writable {
     // REQUIRES: 'phoneNumber', 'events' and 'birthdate' should be in appropriate format of data int,
     // List and LocalDate types respectively, as must the other fields be in String format
     // MODIFIES: this
-    // EFFECTS: Constructs a Person object with given name, relation, birthday,
-    // email ID and phone number ('phoneNumber', 'events' and 'birthdate' in int, List and
+    // EFFECTS: Constructs a Person object with given name, relation, birthday, email ID, phone number
+    // and an empty list of events ('phoneNumber', 'events' and 'birthdate' in int, List and
     // LocalDate types respectively, and all other fields in String format)
     public Person(String name, String relation, LocalDate birthdate, String emailID, int phoneNumber) {
         this.name = name;
@@ -51,7 +52,12 @@ public class Person implements Writable {
         this.birthdate = birthdate;
     }
 
-    // REQUIRES: 'event' should not be null
+    // MODIFIES: this
+    // EFFECTS: A no parameter constructor which constructs an empty list of events
+    public Person() {
+        this.events = new ArrayList<>();
+    }
+
     // MODIFIES: this
     // EFFECTS: Adds an event to the list of events associated with the person, and does nothing
     // if event is null
@@ -146,7 +152,7 @@ public class Person implements Writable {
 
     // EFFECTS: Retrieves and returns a well formatted string representation of the person,
     // including their name, relationship, birthdate, email ID, phone number, and a list of
-    // events - if any are associated with the person.
+    // events - if any are associated with the person (all within a pair of curly bracketss).
     @Override
     public String toString() {
         String result = "Person{name = '" + this.name  + "', relationship = '"

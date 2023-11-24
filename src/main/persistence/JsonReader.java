@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import java.time.LocalDate;
+
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -20,12 +21,12 @@ import org.json.*;
 public class JsonReader {
     private final String source;
 
-    // EFFECTS: constructs reader to read from source file
+    // EFFECTS: Constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads FamilyContactManager from file and returns it;
+    // EFFECTS: Reads FamilyContactManager from the file and returns it;
     // throws IOException if an error occurs reading data from file
     public FamilyContactManager read() throws IOException {
         String jsonData = readFile(this.source);
@@ -33,7 +34,7 @@ public class JsonReader {
         return parseFamilyContactManager(jsonObject);
     }
 
-    // EFFECTS: reads source file as string and returns it
+    // EFFECTS: Reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
@@ -42,7 +43,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses FamilyContactManager from JSON object and returns it
+    // EFFECTS: Parses FamilyContactManager from the JSON object and returns it
     private FamilyContactManager parseFamilyContactManager(JSONObject jsonObject) {
         FamilyContactManager manager = new FamilyContactManager();
         addPeople(manager, jsonObject.getJSONArray("familyContacts"));
@@ -50,7 +51,7 @@ public class JsonReader {
     }
 
     // MODIFIES: manager
-    // EFFECTS: parses person object from JSON object and adds it and subsequent details
+    // EFFECTS: Parses person object from the JSON object and adds it and subsequent details
     // to FamilyContactManager (JSON format)
     private void addPeople(FamilyContactManager manager, JSONArray people) {
         for (Object obj : people) {

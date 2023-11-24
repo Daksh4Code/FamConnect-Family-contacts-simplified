@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+// Test class to test methods from the Person class
 public class TestPerson {
     private Person person;
-    LocalDate eventDate = LocalDate.of(2004, 7, 10);
+    private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 
     @BeforeEach
     public void runBefore() {
@@ -49,7 +50,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testaddEvent() {
+    public void testAddEvent2() {
         Event event1 = new Event("Graduation", eventDate, "John's college graduation");
         person.addEvent(event1);
         assertEquals(1, person.getEvents().size());
@@ -59,7 +60,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testgetEventByName() {
+    public void testGetEventByName() {
         Event event1 = new Event("Graduation", eventDate, "John's college graduation");
         Event event2 = new Event("Anniversary", eventDate, "John and Emily's anniversary");
         person.addEvent(event1);
@@ -163,7 +164,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testGetEventByName() {
+    public void testGetEventByName2() {
         Event event1 = new Event("Birthday", eventDate, "party time");
         Event event2 = new Event("Graduation", eventDate, "College graduation");
         Event event3 = new Event("Anniversary", eventDate, "Anniversary celebration");

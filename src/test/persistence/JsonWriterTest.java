@@ -2,22 +2,28 @@ package persistence;
 
 import model.*;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+// Test class to test methods from the JsonWriter class
 class JsonWriterTest extends JsonTest {
-    private static final String TEST_FILE = "./data/testContacts.json";
+    private static final String TEST_FILE = "./data/testContacts.json"; // change file path name if running
+                                                                        // tests on your local machine
     LocalDate eventDate = LocalDate.of(2004, 7, 10);
+
     @Test
     void testWriterInvalidFile() {
         try {
             FamilyContactManager manager = new FamilyContactManager();
-            JsonWriter jsonWriter = new JsonWriter("./data/my\0illegal:fileName.json");
+            JsonWriter jsonWriter = new JsonWriter("./data/my\0illegal:fileName.json"); // change file path name if running
+                                                                                                // tests on your local machine
             jsonWriter.open();
             jsonWriter.write(manager);
             jsonWriter.close();
@@ -35,23 +41,17 @@ class JsonWriterTest extends JsonTest {
             jsonWriter.open();
             jsonWriter.write(manager);
             jsonWriter.close();
-
             JsonReader jsonReader = new JsonReader(TEST_FILE);
             manager = jsonReader.read();
-
             assertEquals(0, manager.getAllContacts().size());
-
-            // Ensure the list of persons is empty before attempting to get a person
             if (!manager.getAllContacts().isEmpty()) {
                 Person person = manager.getAllContacts().get(0);
                 assertEquals(0, person.getEvents().size());
             }
-
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
-
 
     @Test
     void testWriterGeneralFamilyContactManager() {
@@ -64,7 +64,6 @@ class JsonWriterTest extends JsonTest {
             jsonWriter.open();
             jsonWriter.write(manager);
             jsonWriter.close();
-
             JsonReader jsonReader = new JsonReader(TEST_FILE);
             FamilyContactManager readManager = jsonReader.read();
             List<Person> people = readManager.getAllContacts();
@@ -81,7 +80,6 @@ class JsonWriterTest extends JsonTest {
             assertEquals("Birthday", readEvent.getEventName());
             assertEquals(this.eventDate, readEvent.getEventDate());
             assertEquals("John's birthday", readEvent.getEventDescription());
-
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
