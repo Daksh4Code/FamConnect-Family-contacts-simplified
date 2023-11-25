@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
@@ -362,7 +363,6 @@ public class FamilyContactManagerGUI {
         }
     }
 
-
     // MODIFIES: this
     // EFFECTS: Saves the event to the associated contact
     // If the event date is in an invalid format, displays an error message in a dialog box.
@@ -452,7 +452,7 @@ public class FamilyContactManagerGUI {
         if (relationToSearch != null && !relationToSearch.isEmpty()) {
             List<Person> results = searchContactsByRelationship(relationToSearch);
             if (!results.isEmpty()) {
-                displaySearchResults();
+                displaySearchResults(results); // Pass the results to displaySearchResults
             } else {
                 JOptionPane.showMessageDialog(frame, "No contacts were found with the specified relationship!");
             }
@@ -463,8 +463,10 @@ public class FamilyContactManagerGUI {
     // Returns a list of Person (contacts) objects that match the specified relationship
     private List<Person> searchContactsByRelationship(String relation) {
         List<Person> results = new ArrayList<>();
+        String searchTermLower = relation.toLowerCase().trim();
         for (Person person : familyContacts) {
-            if (person.getRelationship().equalsIgnoreCase(relation)) {
+            String storedRelationLower = person.getRelationship().toLowerCase().trim();
+            if (storedRelationLower.equals(searchTermLower)) {
                 results.add(person);
             }
         }
@@ -474,9 +476,9 @@ public class FamilyContactManagerGUI {
     // EFFECTS: Opens a dialog box titled 'Search results' which displays the search results (the
     // appropriate contacts and their subsequent details, including associated events) in a well formatted
     // manner, when the 'Search by relationship' option on the GUI is used
-    private void displaySearchResults() {
+    private void displaySearchResults(List<Person> results) {
         StringBuilder resultInfo = new StringBuilder("Results:\n");
-        for (Person person : familyContacts) {
+        for (Person person : results) {
             resultInfo.append("    Name: ").append(person.getName())
                     .append(", Relationship: ").append(person.getRelationship())
                     .append(", Birthdate: ").append(person.getBirthdate())
@@ -504,10 +506,10 @@ public class FamilyContactManagerGUI {
             StringBuilder message = new StringBuilder("Upcoming birthdays:\n");
             for (Person person : upcomingBirthdays) {
                 message.append("    Name: ").append(person.getName()).append("\n");
-                message.append("    Birthday: ").append(person.getBirthdate()).append("\n\n");
+                message.append("    Birthday: ").append(formatBirthday(person.getBirthdate())).append("\n\n");
             }
-            JOptionPane.showMessageDialog(frame, message.toString(), "Upcoming "
-                    + "birthdays", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, message.toString(), "Upcoming birthdays",
+                    JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(frame, "There are no upcoming birthdays.");
         }
@@ -519,14 +521,38 @@ public class FamilyContactManagerGUI {
     // upcoming birthdays
     private List<Person> getNextBirthdayPeople() {
         LocalDate currentDate = LocalDate.now();
-        familyContacts.sort(Comparator.comparing(Person::getBirthdate));
         List<Person> upcomingBirthdays = new ArrayList<>();
+        LocalDate earliestBirthday = null;
         for (Person person : familyContacts) {
-            if (person.getBirthdate().isEqual(currentDate) || person.getBirthdate().isAfter(currentDate)) {
-                upcomingBirthdays.add(person);
+            LocalDate nextBirthday = getNextBirthdayDate(person.getBirthdate(), currentDate);
+            if (nextBirthday.isAfter(currentDate) || nextBirthday.isEqual(currentDate)) {
+                if (earliestBirthday == null || nextBirthday.isBefore(earliestBirthday)) {
+                    earliestBirthday = nextBirthday;
+                    upcomingBirthdays.clear();
+                    upcomingBirthdays.add(person);
+                } else if (nextBirthday.isEqual(earliestBirthday)) {
+                    upcomingBirthdays.add(person);
+                }
             }
         }
         return upcomingBirthdays.isEmpty() ? null : upcomingBirthdays;
+    }
+
+    // EFFECTS: Returns the date of the next upcoming birthday after the current date.
+    // If the birthday has already occurred this year, returns the date of the next year's birthday.
+    private LocalDate getNextBirthdayDate(LocalDate birthday, LocalDate currentDate) {
+        LocalDate nextBirthday = birthday.withYear(currentDate.getYear());
+        if (nextBirthday.isBefore(currentDate) || nextBirthday.isEqual(currentDate)) {
+            nextBirthday = nextBirthday.plusYears(1);
+        }
+        return nextBirthday;
+    }
+
+    // EFFECTS: Formats the birthday date to include the year of the current/next year's birthday.
+    private String formatBirthday(LocalDate birthday) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate formattedBirthday = getNextBirthdayDate(birthday, currentDate);
+        return formattedBirthday.format(DateTimeFormatter.ofPattern("MMM d, uuuu"));
     }
 
     // MODIFIES: this

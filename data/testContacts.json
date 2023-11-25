@@ -1,12 +1,45 @@
-{"familyContacts": [{
-    "birthday": "2004-07-10",
-    "phoneNumber": 1234567898,
-    "Associated Events": [{
-        "eventDescription": "John's birthday",
-        "eventName": "Birthday",
-        "eventDate": "2004-07-10"
-    }],
-    "name": "John",
-    "relationship": "Family",
-    "email": "john@example.com"
-}]}
+{"familyContacts": [
+    {
+        "birthday": "2004-07-10",
+        "phoneNumber": 1234567898,
+        "Associated Events": [{
+            "eventDescription": "John's birthday",
+            "eventName": "Birthday",
+            "eventDate": "2004-07-10"
+        }],
+        "name": "John",
+        "relationship": "Family",
+        "email": "john@example.com"
+    },
+    {
+        "birthday": "2008-05-27",
+        "phoneNumber": 739483948,
+        "Associated Events": [
+            {
+                "eventDescription": "Good luck",
+                "eventName": "Board exam start",
+                "eventDate": "2024-05-01"
+            },
+            {
+                "eventDescription": "enjoy!",
+                "eventName": "school holiday",
+                "eventDate": "2023-12-09"
+            }
+        ],
+        "name": "Akshat",
+        "relationship": "brother",
+        "email": "akshat@example.com"
+    },
+    {
+        "birthday": "2024-09-09",
+        "phoneNumber": 73873473,
+        "Associated Events": [{
+            "eventDescription": "test",
+            "eventName": "Example",
+            "eventDate": "2025-09-07"
+        }],
+        "name": "Prashant",
+        "relationship": "Dad",
+        "email": "example@example.com"
+    }
+]}
