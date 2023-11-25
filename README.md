@@ -89,6 +89,8 @@ database. **(CUSTOM)**
 - As a user, I want the ability to search
 for contacts and their associated details from my
 database based on a certain criteria. **(CUSTOM)**
+- As a user, I want the ability to see the contact(s) whose
+birthday(s) is/are upcoming. **(CUSTOM)**
 - As a user, when the application's main menu is
 displayed, I want to be given the option of saving
 the contacts and their associated details so far to
@@ -134,8 +136,12 @@ database. **(CUSTOM)**
 - As a user, I want the ability to search
 for contacts and their associated details from my
 database based on a certain criteria. **(CUSTOM)**
+- As a user, I want the ability to see the contact(s) whose
+birthday(s) is/are upcoming. **(CUSTOM)**
 
 # Instructions for Grader
+- NOTE FOR GRADER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
+REQUIRED ACTIONS.) THEN, SEE BELOW FOR FURTHER INSTRUCTIONS.
 - You can generate the first required action related to 
 the user story "adding multiple Xs to a Y" by clicking on
 the 'Add Contact' button on the GUI. Here, you can add 
@@ -144,7 +150,8 @@ details to a list of contacts. Apart from basic details
 such as the relation or phone number, you can also add 
 multiple events associated with 'Person' objects, using 
 objects of the 'Event' class, and unique to each 'Person' 
-object.
+object. The 'Save contact' and 'Save event' buttons need
+to be clicked to save the details to the list of contacts.
 - You can view the panel in which "all the Xs that have
 already been added to Y" are displayed by clicking on 
 the 'View Contacts' button on the GUI. Here, you can 
@@ -154,19 +161,31 @@ including all details as well as the details all the
 subsequent unique 'Event' objects associated with each 
 Person object, if any. The details of each 'Event' object 
 include an event name, an event date and an event description.
-- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+- You can generate the second required action related to the 
+user story "displaying a subset of the Xs" by clicking on the
+'Search by relationship' button on the GUI. Here, you can enter 
+a relation and all contacts (along with their details and associated
+events and their details) with that relation are displayed. The 
+search bar is not case-sensitive.
 - You can locate my visual component in the first few seconds
 before the main GUI opens and runs. In the first few seconds,
-a splash screen with a strikingly colourful image, a 
-welcome message and a loading bar pops up. Once the 
-loading bar is complete and the main GUI opens, this 
+a splash screen with a strikingly colourful and constantly 
+changing image, a welcome message and a loading bar pops up. 
+Once the loading bar is complete and the main GUI opens, this 
 splash screen closes.
 - You can save the state of my application by clicking on 
 the 'Save Contacts' button on the GUI. This will save all the 
-contacts added so far to a file.
+contacts added so far to a JSON file.
 - You can reload the state of my application by clicking on
 the 'Load Contacts' button on the GUI. This will load all the
-contacts (which were saved to a file in a previous run) 
-from a file.
+contacts (which were saved to a JSON file in a previous run) 
+from a JSON file.
+- You can generate another action related to the
+user story "showing upcoming birthday(s)" by clicking on the
+'Show upcoming birthday' button on the GUI. Here, you can see
+the contact (the name and birthday only) or contacts whose 
+birthday(s) is/are upcoming next. The person whose birthday 
+is upcoming next is displayed. If more than one person's 
+birthday is upcoming, they are both displayed.
 
 

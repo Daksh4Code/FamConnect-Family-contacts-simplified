@@ -138,8 +138,7 @@ public class FamilyContactManagerApp {
                 System.out.println("Invalid input. Please enter a valid phone number using integers only.");
             }
         }
-        Person person = new Person(name, relation, birthdate, emailID, phoneNumber);
-        return person;
+        return new Person(name, relation, birthdate, emailID, phoneNumber);
     }
 
     // EFFECTS: Returns and retrieves the list and subsequent details of all family contacts and
@@ -224,8 +223,8 @@ public class FamilyContactManagerApp {
                 System.out.println("Invalid input. Please enter a valid phone number using integers only.");
             }
         }
-        Result result = new Result(relation, birthdate, email, updatedPhoneNumber);
-        return result;
+        return new Result(relation, birthdate, email, updatedPhoneNumber);
+
     }
 
     // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
@@ -252,16 +251,14 @@ public class FamilyContactManagerApp {
     private Event getEvent(Person person) {
         System.out.print("Enter the name of the event: ");
         String eventName = this.scanner.nextLine();
-        Event existingEvent = person.getEventByName(eventName);
-        return existingEvent;
+        return person.getEventByName(eventName);
     }
 
     // EFFECTS: Acts as a helper method to reduce length of updateContactDetails() method
     private Person getPerson1() {
         System.out.print("Enter the name of the contact you wish to update: ");
         String name = this.scanner.nextLine();
-        Person person = this.familyContactManager.getPersonByName(name);
-        return person;
+        return this.familyContactManager.getPersonByName(name);
     }
 
     // EFFECTS: Acts as a helper class for getResult() helper method

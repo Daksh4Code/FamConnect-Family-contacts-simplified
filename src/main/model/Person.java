@@ -152,7 +152,7 @@ public class Person implements Writable {
 
     // EFFECTS: Retrieves and returns a well formatted string representation of the person,
     // including their name, relationship, birthdate, email ID, phone number, and a list of
-    // events - if any are associated with the person (all within a pair of curly bracketss).
+    // events - if any are associated with the person (all within a pair of curly brackets).
     @Override
     public String toString() {
         String result = "Person{name = '" + this.name  + "', relationship = '"
