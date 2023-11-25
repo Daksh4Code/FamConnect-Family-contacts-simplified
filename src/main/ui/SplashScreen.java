@@ -5,6 +5,8 @@ import java.awt.*;
 
 import java.util.Random;
 
+import ui.FamilyContactManagerGUI;
+
 // The SplashScreen class creates a simple graphical splash screen for a Java Swing application.
 // It displays a welcome message, a progress bar, and changes the background color dynamically.
 // The splash screen is shown for a fixed duration, and then it transitions to the main application
