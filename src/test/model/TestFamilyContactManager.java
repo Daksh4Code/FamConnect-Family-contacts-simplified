@@ -119,6 +119,33 @@ public class TestFamilyContactManager {
         assertNotNull(familyContactManager.getAllContacts());
         assertEquals(personList, familyContactManager.getAllContacts());
     }
+
+    @Test
+    public void testUpdatePersonDetails2() {
+        FamilyContactManager familyContactManager = new FamilyContactManager();
+        Person originalPerson = new Person();
+        originalPerson.setName("John");
+        originalPerson.setRelationship("Brother");
+        originalPerson.setBirthdate(LocalDate.of(1990, 5, 15));
+        originalPerson.setEmailID("john@example.com");
+        originalPerson.setPhoneNumber(123456789);
+        familyContactManager.addPerson(originalPerson);
+        Person updatedPerson = new Person();
+        updatedPerson.setRelationship("Updated Brother");
+        updatedPerson.setBirthdate(LocalDate.of(1992, 8, 20));
+        updatedPerson.setEmailID("updated_john@example.com");
+        updatedPerson.setPhoneNumber(987654321);
+        familyContactManager.updatePersonDetails("John", updatedPerson);
+        Person updatedResult = familyContactManager.getPersonByName("John");
+        assertNotNull(updatedResult);
+        assertEquals("Updated Brother", updatedResult.getRelationship());
+        assertEquals(LocalDate.of(1992, 8, 20), updatedResult.getBirthdate());
+        assertEquals("updated_john@example.com", updatedResult.getEmailID());
+        assertEquals(987654321, updatedResult.getPhoneNumber());
+        familyContactManager.updatePersonDetails("NonExistingPerson", updatedPerson);
+        Person nonExistingResult = familyContactManager.getPersonByName("NonExistingPerson");
+        assertNull(nonExistingResult);
+    }
 }
 
 
