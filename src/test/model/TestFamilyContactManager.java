@@ -103,6 +103,13 @@ public class TestFamilyContactManager {
         assertEquals("alice@email.com", gotPerson.getEmailID());
         assertEquals(234567890, gotPerson.getPhoneNumber());
     }
+
+    @Test
+    public void testFamilyContactManagerConstructor() {
+        FamilyContactManager familyContactManager = new FamilyContactManager();
+        assertNotNull(familyContactManager.getAllContacts());
+        assertTrue(familyContactManager.getAllContacts().isEmpty());
+    }
 }
 
 

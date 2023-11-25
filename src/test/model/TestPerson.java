@@ -206,4 +206,11 @@ public class TestPerson {
         person.deleteEvent("Birthday");
         assertEquals(0, person.getEvents().size());
     }
+
+    @Test
+    public void testPersonConstructor() {
+        Person person = new Person();
+        assertNotNull(person.getEvents());
+        assertTrue(person.getEvents().isEmpty());
+    }
 }
