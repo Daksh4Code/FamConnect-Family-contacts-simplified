@@ -181,7 +181,7 @@ the 'Load Contacts' button on the GUI. This will load all the
 contacts (which were saved to a JSON file in a previous run) 
 from a JSON file.
 - You can generate another action related to the
-user story "showing upcoming birthday(s)" by clicking on the
+user story "highlight most important X" by clicking on the
 'Show upcoming birthday' button on the GUI. Here, you can see
 the contact (the name and birthday only) or contacts whose 
 birthday(s) is/are upcoming next. The person whose birthday 
