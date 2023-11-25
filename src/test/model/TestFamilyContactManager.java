@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 // Test class to test methods from the FamilyContactManager class
@@ -105,10 +106,18 @@ public class TestFamilyContactManager {
     }
 
     @Test
-    public void testFamilyContactManagerConstructor() {
+    public void testFamilyContactManagerConstructor1() {
         FamilyContactManager familyContactManager = new FamilyContactManager();
         assertNotNull(familyContactManager.getAllContacts());
         assertTrue(familyContactManager.getAllContacts().isEmpty());
+    }
+
+    @Test
+    public void testFamilyContactManagerConstructor2() {
+        List<Person> personList = new ArrayList<>();
+        FamilyContactManager familyContactManager = new FamilyContactManager(personList);
+        assertNotNull(familyContactManager.getAllContacts());
+        assertEquals(personList, familyContactManager.getAllContacts());
     }
 }
 
