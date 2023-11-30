@@ -141,7 +141,7 @@ birthday(s) is/are upcoming. **(CUSTOM)**
 
 # Instructions for Grader
 - NOTE FOR GRADER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
-REQUIRED ACTIONS.) THEN, SEE BELOW FOR FURTHER INSTRUCTIONS.
+REQUIRED ACTIONS. THEN, SEE BELOW FOR FURTHER INSTRUCTIONS.
 - You can generate the first required action related to 
 the user story "adding multiple Xs to a Y" by clicking on
 the 'Add Contact' button on the GUI. Here, you can add 

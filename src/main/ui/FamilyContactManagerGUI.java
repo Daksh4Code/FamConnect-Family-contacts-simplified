@@ -20,7 +20,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 // The 'FamilyContactManagerGUI' class represents a GUI application for managing family contacts and
@@ -355,7 +354,6 @@ public class FamilyContactManagerGUI {
         while (true) {
             JDialog addEventsDialog = createAddEventsDialog();
             addEventsDialog.setVisible(true);
-
             if (JOptionPane.showConfirmDialog(frame, "Do you want to add another event?", "Add another event",
                     JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 break;
