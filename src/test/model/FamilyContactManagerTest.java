@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Test class to test methods from the FamilyContactManager class
-public class TestFamilyContactManager {
+public class FamilyContactManagerTest {
     private FamilyContactManager contactManager;
     private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 // Test class to test methods from the Person class
-public class TestPerson {
+public class PersonTest {
     private Person person;
     private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 

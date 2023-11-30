@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 // Test class to test methods from the Event class
-public class TestEvent {
+public class EventTest {
     private Event event;
     private LocalDate eventDate = LocalDate.of(2004, 7, 10);
 

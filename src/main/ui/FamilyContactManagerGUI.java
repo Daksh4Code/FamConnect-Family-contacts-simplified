@@ -29,6 +29,7 @@ import java.util.List;
 // 'Person' (contact) object.
 // It also gives an option to display the contact whose birthday is coming up next.
 public class FamilyContactManagerGUI {
+    private FamilyContactManager familyContactManager;
     private JFrame frame;
     private List<Person> familyContacts;
     private JLabel imageLabel;
@@ -53,6 +54,7 @@ public class FamilyContactManagerGUI {
         frame.setVisible(true);
         imageLabel = new JLabel();
         frame.add(imageLabel);
+        familyContactManager = new FamilyContactManager();
     }
 
     // MODIFIES: this
@@ -119,7 +121,7 @@ public class FamilyContactManagerGUI {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                exitAndPrintLog();
             }
         });
         frame.add(exitButton);
@@ -157,6 +159,8 @@ public class FamilyContactManagerGUI {
     // the name, relationship, birthdate, email, and phone number of the contact. Upon clicking the
     // "Save contact" button, it checks if the contact can be saved using the saveContactBool
     // method. If successful, it opens the addEventsDialog() method and disposes of the addContactDialog.
+    // Also calls the logAddContactsEvent() method from the familyContactManager class which logs the
+    // action of adding a contact (and associated details)
     private void addContact() {
         JDialog addContactDialog = createContactDialog("Add a new contact", 6);
         JButton saveContactButton = new JButton("Save contact");
@@ -170,6 +174,7 @@ public class FamilyContactManagerGUI {
                 }
             }
         });
+        familyContactManager.logAddContactsEvent();
         addContactDialog.setVisible(true);
     }
 
@@ -243,7 +248,8 @@ public class FamilyContactManagerGUI {
     }
 
     // EFFECTS: Validates the phoneNumberField in the 'Add a new contact' dialog
-    // Displays an error message for an invalid phone number length
+    // Displays an error message for an invalid phone number length or an invalid phone
+    // number format
     // Returns true if the phone number is valid, false otherwise
     private boolean validatePhoneNumber() {
         if (!phoneNumberField.getText().isEmpty() && (phoneNumberField.getText().length() < 8
@@ -251,6 +257,13 @@ public class FamilyContactManagerGUI {
             JOptionPane.showMessageDialog(frame, "Invalid phone number. Please enter a "
                      + "valid phone number between 8 and 10 digits.");
             return false;
+        }
+        String phoneNumber = phoneNumberField.getText();
+        for (char c : phoneNumber.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                JOptionPane.showMessageDialog(frame, "Invalid phone number. Please enter only numeric digits.");
+                return false;
+            }
         }
         return true;
     }
@@ -401,6 +414,8 @@ public class FamilyContactManagerGUI {
     // directory
     // Displays a success message if the contacts are successfully loaded; otherwise, displays an
     // error message
+    // Also calls the logShowUpcomingBirthdayEvent() method from the familyContactManager class
+    // which logs the action of loading all the contact(s) from a JSON file
     // Note: File path name to change as per local device
     private void loadContacts() {
         try {
@@ -410,16 +425,20 @@ public class FamilyContactManagerGUI {
             familyContacts.clear();
             familyContacts.addAll(loadedManager.getAllContacts());
             JOptionPane.showMessageDialog(frame, "Contacts were successfully loaded!");
+            familyContactManager.logLoadContactsEvent();
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frame, "Error in loading contacts!");
         }
+
     }
 
     // EFFECTS: Saves the family contacts to a JSON file named "testContacts.json" in the "./data/"
     // directory
     // Displays a success message if the contacts are successfully saved; otherwise, displays an
     // error message
+    // Also calls the logSaveContactsEvent() method from the familyContactManager class
+    // which logs the action of saving all the contact(s) to a JSON file
     // Note: File path name to change as per local device
     private void saveContacts() {
         JsonWriter jsonWriter = null;
@@ -430,6 +449,7 @@ public class FamilyContactManagerGUI {
             jsonWriter.write(new FamilyContactManager(familyContacts));
             jsonWriter.close();
             JOptionPane.showMessageDialog(frame, "Contacts were successfully saved!");
+            familyContactManager.logSaveContactsEvent();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frame, "Error in saving contacts!");
@@ -450,7 +470,7 @@ public class FamilyContactManagerGUI {
         if (relationToSearch != null && !relationToSearch.isEmpty()) {
             List<Person> results = searchContactsByRelationship(relationToSearch);
             if (!results.isEmpty()) {
-                displaySearchResults(results); // Pass the results to displaySearchResults
+                displaySearchResults(results);
             } else {
                 JOptionPane.showMessageDialog(frame, "No contacts were found with the specified relationship!");
             }
@@ -459,6 +479,9 @@ public class FamilyContactManagerGUI {
 
     // EFFECTS: Searches the familyContacts list for contacts with the specified relationship
     // Returns a list of Person (contacts) objects that match the specified relationship
+    // Also calls the logSearchByRelationshipEvent(String relation) method from the
+    // familyContactManager class which logs the action of searching for all contact(s)
+    // with a specified relation
     private List<Person> searchContactsByRelationship(String relation) {
         List<Person> results = new ArrayList<>();
         String searchTermLower = relation.toLowerCase().trim();
@@ -468,6 +491,7 @@ public class FamilyContactManagerGUI {
                 results.add(person);
             }
         }
+        familyContactManager.logSearchByRelationshipEvent(relation);
         return results;
     }
 
@@ -516,7 +540,9 @@ public class FamilyContactManagerGUI {
     // MODIFIES: this
     // EFFECTS: Returns a list of contacts with upcoming birthdays or the person whose birthday is
     // today, sorted by their birthdates in ascending order. Returns null if there are no
-    // upcoming birthdays
+    // upcoming birthdays.
+    // Also calls the logShowUpcomingBirthdayEvent() method from the familyContactManager class
+    // which logs the action of viewing the contact(s) with the nearest upcoming birthday(s)
     private List<Person> getNextBirthdayPeople() {
         LocalDate currentDate = LocalDate.now();
         List<Person> upcomingBirthdays = new ArrayList<>();
@@ -533,6 +559,7 @@ public class FamilyContactManagerGUI {
                 }
             }
         }
+        familyContactManager.logShowUpcomingBirthdayEvent();
         return upcomingBirthdays.isEmpty() ? null : upcomingBirthdays;
     }
 
@@ -561,6 +588,19 @@ public class FamilyContactManagerGUI {
         birthdateField.setText("");
         emailField.setText("");
         phoneNumberField.setText("");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Exits the app and closes the GUI
+    // The Event Log with all actions performed in the session is displayed before the GUI closes, when
+    // the system exits the app
+    private void exitAndPrintLog() {
+        StringBuilder logMessage = new StringBuilder("Events logged during this session:\n");
+        for (EventAlarmSystem eventAlarmSystem : EventLog.getInstance()) {
+            logMessage.append(eventAlarmSystem.toString()).append("\n\t");
+        }
+        JOptionPane.showMessageDialog(frame, logMessage.toString(), "Event Log", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
     // EFFECTS: The 'Main' method initializes the 'FamilyContactManagerGUI' and starts the application.

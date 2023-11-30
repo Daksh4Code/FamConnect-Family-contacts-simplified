@@ -14,12 +14,14 @@ import persistence.Writable;
 // It also contains methods related to JSON files for data persistence of the app.
 public class FamilyContactManager implements Writable {
     private List<Person> familyContacts;
+    private EventLog eventLog;
 
     // MODIFIES: this
     // EFFECTS: A no parameter constructor that constructs a family contact manager object with one
     // (initially empty) list - for family contacts
     public FamilyContactManager() {
         this.familyContacts = new ArrayList<>();
+        this.eventLog = EventLog.getInstance();
     }
 
     // MODIFIES: this
@@ -95,5 +97,61 @@ public class FamilyContactManager implements Writable {
             jsonArray.put(person.toJson());
         }
         return jsonArray;
+    }
+
+    // REQUIRES: searchContactsByRelationship(String relation) method from FamilyContactManagerGUI class
+    // should work because the same 'String 'relation'' parameter is reused in this method
+    // MODIFIES: this
+    // EFFECTS: Logs an event indicating that a search for contact(s) was performed by specifying a
+    // relationship
+    // Creates and logs the event in the event log with a specific relevant message
+    public void logSearchByRelationshipEvent(String relation) {
+        String eventDescription = "\t\t Searched for contact(s) by specifying a relationship: " + relation;
+        EventAlarmSystem logEvent = new EventAlarmSystem(eventDescription);
+        eventLog.logEvent(logEvent);
+    }
+
+    // REQUIRES: addContact() method from FamilyContactManagerGUI class should work
+    // MODIFIES: this
+    // EFFECTS: Logs an event indicating that an attempt to add a contact has been made
+    // Creates and logs the event in the event log with a specific relevant message
+    public void logAddContactsEvent() {
+        String eventDescription = "\t\t Added a contact with details as needed.";
+        EventAlarmSystem logEvent = new EventAlarmSystem(eventDescription);
+        eventLog.logEvent(logEvent);
+    }
+
+    // REQUIRES: getNextBirthdayPeople() method from FamilyContactManagerGUI class
+    // should work
+    // MODIFIES: this
+    // EFFECTS: Logs an event indicating that the contact(s) with upcoming birthday(s)
+    // have been viewed
+    // Creates and logs the event in the event log with a specific relevant message
+    public void logShowUpcomingBirthdayEvent() {
+        String eventDescription = "\t\t Viewed the contact(s) with the nearest upcoming birthday(s).";
+        EventAlarmSystem logEvent = new EventAlarmSystem(eventDescription);
+        eventLog.logEvent(logEvent);
+    }
+
+    // REQUIRES: loadContacts() method from FamilyContactManagerGUI class
+    // should work
+    // MODIFIES: this
+    // EFFECTS: Logs an event indicating that the contact(s) have been loaded from a JSON file
+    // Creates and logs the event in the event log with a specific relevant message
+    public void logLoadContactsEvent() {
+        String eventDescription = "\t\t Loaded the contacts from a JSON file.";
+        EventAlarmSystem logEvent = new EventAlarmSystem(eventDescription);
+        eventLog.logEvent(logEvent);
+    }
+
+    // REQUIRES: saveContacts() method from FamilyContactManagerGUI class
+    // should work
+    // MODIFIES: this
+    // EFFECTS: Logs an event indicating that the contact(s) have been saved to a JSON file
+    // Creates and logs the event in the event log with a specific relevant message
+    public void logSaveContactsEvent() {
+        String eventDescription = "\t\t Saved the contacts to a JSON file.";
+        EventAlarmSystem logEvent = new EventAlarmSystem(eventDescription);
+        eventLog.logEvent(logEvent);
     }
 }

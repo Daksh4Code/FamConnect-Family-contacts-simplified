@@ -1,12 +1,12 @@
 {"familyContacts": [{
-    "birthday": "2004-07-10",
-    "phoneNumber": 1234567898,
+    "birthday": "2009-09-09",
+    "phoneNumber": 73827382,
     "Associated Events": [{
-        "eventDescription": "John's birthday",
-        "eventName": "Birthday",
-        "eventDate": "2004-07-10"
+        "eventDescription": "fej",
+        "eventName": "ie",
+        "eventDate": "2008-09-07"
     }],
     "name": "John",
-    "relationship": "Family",
-    "email": "john@example.com"
+    "relationship": "friend",
+    "email": "hueh@example.com"
 }]}

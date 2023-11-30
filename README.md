@@ -100,6 +100,10 @@ be given the option of (re)loading the contacts and
 their associated details added so far from the file,
 from the previous run, and resume from there.
 **(REQUIRED/LOADING)**
+- As a user, when I exit the application, I want to 
+view a (logged) console which displays all the 
+key events performed during that session of the app.
+**(REQUIRED/LOGGING)**
 ## In phase 1:
 - As a user, I want to be able to add new
 individuals (names) to my family contact database.
@@ -138,6 +142,12 @@ for contacts and their associated details from my
 database based on a certain criteria. **(CUSTOM)**
 - As a user, I want the ability to see the contact(s) whose
 birthday(s) is/are upcoming. **(CUSTOM)**
+
+## In phase 4:
+- As a user, when I exit the application, I want to
+view a (logged) console which displays all the
+key events performed during that session of the app.
+**(REQUIRED/LOGGING)**
 
 # Instructions for Grader
 - NOTE FOR GRADER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
@@ -187,5 +197,24 @@ the contact (the name and birthday only) or contacts whose
 birthday(s) is/are upcoming next. The person whose birthday 
 is upcoming next is displayed. If more than one person's 
 birthday is upcoming, they are both displayed.
+
+## Phase 4: Task 2
+Here is a representative sample of the events that 
+occur when my program runs - <br> <br>
+Events logged during this session: <br>
+Thu Nov 30 03:29:35 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Loaded the contacts from a JSON file.<br>
+Thu Nov 30 03:29:40 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Loaded the contacts from a JSON file.<br>
+Thu Nov 30 03:29:41 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Added a contact with details as needed.<br>
+Thu Nov 30 03:30:15 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Searched for contact(s) by specifying a relationship: friend<br>
+Thu Nov 30 03:30:19 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Searched for contact(s) by specifying a relationship: brother<br>
+Thu Nov 30 03:30:21 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Viewed the contact(s) with the nearest upcoming birthday(s).<br>
+Thu Nov 30 03:30:24 PST 2023<br>
+&nbsp; &nbsp; &nbsp;Saved the contacts to a JSON file.<br>
 
 
