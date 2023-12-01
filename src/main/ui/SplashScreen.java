@@ -62,7 +62,7 @@ public class SplashScreen {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weighty = 1.0; // Center vertically
+        gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(welcomeLabel, gbc);
         gbc.gridy = 1;

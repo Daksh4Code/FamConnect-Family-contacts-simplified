@@ -199,7 +199,7 @@ is upcoming next is displayed. If more than one person's
 birthday is upcoming, they are both displayed.
 
 ## Phase 4: Task 2
-Here is a representative sample of the events that 
+- Here is a representative sample of the events that 
 occur when my program runs - <br> <br>
 Events logged during this session: <br>
 Thu Nov 30 03:29:35 PST 2023<br>
@@ -216,5 +216,23 @@ Thu Nov 30 03:30:21 PST 2023<br>
 &nbsp; &nbsp; &nbsp;Viewed the contact(s) with the nearest upcoming birthday(s).<br>
 Thu Nov 30 03:30:24 PST 2023<br>
 &nbsp; &nbsp; &nbsp;Saved the contacts to a JSON file.<br>
+
+## Phase 4: Task 3
+- In my project, I find that I had to code the 
+GUI part of my application, along with its complete 
+functionality, almost entirely from scratch. Apart from 
+the code for the saving and loading features from 
+the classes and methods of the persistence package, 
+no other part of my code was practically reusable and useful 
+for building the GUI as in Phase 3 of the project. Hence, 
+the aim of incrementally developing the code for my project
+was defeated. I could, however, use the logic and ideas from the code written in 
+previous developmental phases.
+- If I had more time to work on the project, I would 
+increase the code reusability by making use of inheritance
+principles. Ideally, the code developed during initial 
+phases should have served as a base for further development.
+This is a design flaw in my application, which can certainly
+be improved upon in the future.
 
 
