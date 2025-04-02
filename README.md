@@ -1,10 +1,10 @@
-# FamContact: Family contacts simplified
+# FamConnect: Family contacts simplified
 
 ## About my project
 
 **What will the application do?**
 
-- The *"FamContact"* software is designed to serve 
+- The *"FamConnect"* software is designed to serve 
 as a comprehensive family contact and associated 
 event management system. Users will have the ability 
 to effortlessly add individuals to their database, 
@@ -42,7 +42,7 @@ family ties through efficient information management.
 
 **Why is this project of interest to me?**
 
-- The *"FamContact"* project holds profound personal 
+- The *"FamConnect"* project holds profound personal 
 significance for me, as it embodies the cultural values
 and dynamics of my upbringing. I originate from a 
 background where close-knit, extended family structures 
@@ -60,7 +60,7 @@ commitment to create a tool that not only caters to my
 own needs but also serves as a valuable resource for a 
 diverse range of users facing similar familial 
 circumstances.
-- *"FamContact"* represents my aspiration to bring 
+- *"FamConnect"* represents my aspiration to bring 
 families closer together, bridging the gap between 
 traditional values and modern lifestyles in today's 
 fast-paced world.
@@ -150,7 +150,7 @@ key events performed during that session of the app.
 **(REQUIRED/LOGGING)**
 
 # Instructions for Grader
-- NOTE FOR GRADER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
+- NOTE FOR VIEWER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
 REQUIRED ACTIONS. THEN, SEE BELOW FOR FURTHER INSTRUCTIONS.
 - You can generate the first required action related to 
 the user story "adding multiple Xs to a Y" by clicking on
