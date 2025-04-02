@@ -2,11 +2,11 @@
     "birthday": "2009-09-09",
     "phoneNumber": 73827382,
     "Associated Events": [{
-        "eventDescription": "fej",
-        "eventName": "ie",
+        "eventDescription": "amazing",
+        "eventName": "sampleevent",
         "eventDate": "2008-09-07"
     }],
     "name": "John",
     "relationship": "friend",
-    "email": "hueh@example.com"
+    "email": "hugh@example.com"
 }]}
