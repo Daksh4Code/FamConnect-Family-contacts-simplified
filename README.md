@@ -26,7 +26,7 @@ blueprint design of this system.
 
 **Who will use it?**
 
-- The *"FamContact"* project is tailored to meet the 
+- The *"FamConnect"* project is tailored to meet the 
 needs of a diverse user base. It targets individuals 
 who hold family connections in high regard and are in 
 search of a practical solution to manage family events 
@@ -35,7 +35,7 @@ family structures, those who encounter challenges in
 keeping track of various family events, and those who 
 may not feel entirely at ease with currently available 
 apps for this purpose, such as senior citizens.
-- "FamContact" aspires to serve as a widely 
+- "FamConnect" aspires to serve as a widely 
 accessible, inclusive and user-friendly tool for 
 anyone seeking to maintain and strengthen their 
 family ties through efficient information management.
