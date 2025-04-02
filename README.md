@@ -149,7 +149,7 @@ view a (logged) console which displays all the
 key events performed during that session of the app.
 **(REQUIRED/LOGGING)**
 
-# Instructions for Grader
+# Instructions for Viewer
 - NOTE FOR VIEWER: RUN THE **'SplashScreen'** CLASS TO SEE ALL 
 REQUIRED ACTIONS. THEN, SEE BELOW FOR FURTHER INSTRUCTIONS.
 - You can generate the first required action related to 
